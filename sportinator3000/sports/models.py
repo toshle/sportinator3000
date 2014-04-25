@@ -38,6 +38,7 @@ class Sport(models.Model):
 
 class Activity(models.Model):
     sport = models.ForeignKey(Sport)
+    place = models.ForeignKey(Place)
     name = models.CharField(max_length=200)
     has_trainer = models.BooleanField()
     price = models.FloatField()
