@@ -6,8 +6,7 @@ body {
   bottom: 0;
   margin: 0;
   font-family: Verdana;
-  background-image: url('../img/map.png');
-  background-size: cover;
+  background-color: #F1EEE8;
 }
 
 * {
