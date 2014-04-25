@@ -20,13 +20,16 @@
       <div id="login">
         <form method="post">
           <input type="submit" name="submit" value="" />
-          <input type="text" placeholder="Username" name="username"/><br />
+          <input type="text" placeholder="Username" name="username"/>
+          <br />
           <input type="password" placeholder="Password" name="password"/>
         </form>
         <a href="#">Регистрация</a> / <a href="#">Забравена парола</a>
       </div>
     </header>
+    <main>
     {% block main %}{% endblock %}
+    </main>
     <footer>
       <a href="#">#ПодайМонстъраТам</a>
     </footer>
