@@ -24,16 +24,17 @@ class Place(models.Model):
     longitude   = models.IntegerField()
     description = models.TextField()
     date_added  = models.DateTimeField(default=datetime.now())
-    
+
     def __str__():
         return '{}, {}, {}'.format(name, city, address)
+
 
 class Sport(models.Model):
     name      = models.CharField(max_length=100)
     photo_url = models.CharField(max_length=300, blank=True)
-    
+
     def __str__():
-        return '{}',format(name)
+        return '{}'.format(name)
 
 
 class Activity(models.Model):
