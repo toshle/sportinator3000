@@ -1,15 +1,7 @@
 from django.db import models
 from datetime import datetime
 
-<<<<<<< HEAD
-class Activity(models.Model):
-    sport = models.ForeignKey(Sport)
-    name = models.CharField(max_length=200)
-    has_trainer = models.BooleanField()
-    price = models.FloatField()
-    duration = models.IntegerField()
-    worktime = models.CharField(max_length=50)
-=======
+
 CITIES = (
     ('Varna', 'Варна'),
     ('Sofia', 'София'),
@@ -42,4 +34,12 @@ class Sport(models.Model):
     
     def __str__():
         return name
->>>>>>> 400cdec0955108c05bbeebb4f455a2ed77936008
+
+
+class Activity(models.Model):
+    sport = models.ForeignKey(Sport)
+    name = models.CharField(max_length=200)
+    has_trainer = models.BooleanField()
+    price = models.FloatField()
+    duration = models.IntegerField()
+    worktime = models.CharField(max_length=50)
