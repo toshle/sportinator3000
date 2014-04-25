@@ -25,6 +25,14 @@ class Place(models.Model):
     description = models.TextField()
     date_added = models.DateTimeField(default=datetime.now())
 
+    @classmethod
+    def get_all(cls):
+        return cls.objects.all()
+
+    @classmethod
+    def get_city(cls, city_name):
+        return cls.objects.filter(city=city_name)
+
     def __str__(self):
         return '{}, {}, {}'.format(self.name, self.city, self.address)
 
@@ -32,6 +40,14 @@ class Place(models.Model):
 class Sport(models.Model):
     name = models.CharField(max_length=100)
     photo_url = models.CharField(max_length=300, blank=True)
+
+    @classmethod
+    def get_all(cls):
+        return cls.objects.all()
+
+    @classmethod
+    def get_sport(cls, sport_name):
+        return cls.objects.filter(name=sport_name)
 
     def __str__(self):
         return '{}'.format(self.name)
@@ -45,6 +61,14 @@ class Activity(models.Model):
     duration = models.IntegerField()
     worktime = models.CharField(max_length=50)
 
+    @classmethod
+    def get_all(cls):
+        return cls.objects.all()
+
+    @classmethod
+    def get_activities(cls, activity_by_sport):
+        return cls.objects.filter(sport=Sport.get_sport(activity_by_sport))
+
     def __str__(self):
         return '{}'.format(self.name)
 
@@ -52,6 +76,23 @@ class Activity(models.Model):
 class PlaceActivity(models.Model):
     place = models.ForeignKey(Place)
     activity = models.ForeignKey(Activity)
+
+    @classmethod
+    def get_all(cls):
+        return cls.objects.all()
+
+    @classmethod
+    def get_by_sport(cls, sport_name):
+        return cls.objects.filter(activity=Activity.get_activities(sport_name))
+
+    @classmethod
+    def get_by_city(cls, city_name):
+        return cls.objects.filter(place=Place.get_city(city_name))
+
+    @classmethod
+    def get_by_sport_and_city(cls, sport_name, city_name):
+        return cls.get_by_city(city_name).filter(activity=Activity.get_activities(sport_name))
+
 
     def __str__(self):
         return '{}'.format(self.place)
