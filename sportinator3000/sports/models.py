@@ -44,3 +44,6 @@ class Activity(models.Model):
     price = models.FloatField()
     duration = models.IntegerField()
     worktime = models.CharField(max_length=50)
+
+    def __str__():
+        return '{}'.format(name)
