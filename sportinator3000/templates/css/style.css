@@ -9,6 +9,11 @@ body {
   background-color: #F1EEE8;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
+
 * {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -18,6 +23,7 @@ header {
   position: relative;
   background-color: rgba(70, 70, 70, 0.8);
   height: 100px;
+  color: white;
 }
 
 main {
@@ -55,8 +61,6 @@ nav > a {
 
 nav > a:hover {
   background-color: orange;
-  text-decoration: underline;
-
 }
 
 #logo {
@@ -68,18 +72,39 @@ nav > a:hover {
 }
 
 #login {
-
+  font-size: 12px;
   position: absolute;
   right: 50px;
-  bottom: 5px;
+  bottom: 3px;
 
+}
+
+#login a {
+  color: white;
+  font-size: 11px;
+  text-decoration: none;
+}
+
+#login input {
+  border: 1px rgba(0, 0, 0, 0.7) solid;
+  height: 20px;
+  border-radius: 3px;
+  margin-top: 5px;
 }
 
 #login input[type="submit"] {
   color: white;
-  background: none;
-  font-size: 48px;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url("login.png");
+  background-position: center;
+  background-size: 100% 80%;
+  background-repeat: no-repeat;
+  border: none;
+  font-size: 30px;
   float: right;
-  height: 50px;
+  height: 45px;
   width: 50px;
+  display: block;
+  margin-left: 5px;
+  vertical-align: middle;
 }
