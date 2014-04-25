@@ -33,7 +33,7 @@ class Sport(models.Model):
     photo_url = models.CharField(max_length=300, blank=True)
     
     def __str__():
-        return name
+        return '{}',format(name)
 
 
 class Activity(models.Model):
