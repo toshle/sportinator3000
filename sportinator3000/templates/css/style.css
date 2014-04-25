@@ -6,7 +6,7 @@ body {
   bottom: 0;
   margin: 0;
   font-family: Verdana;
-  background-image: url('../img/map.png');
+  background-image: url('map.png');
   background-size: cover;
 }
 
@@ -62,8 +62,6 @@ nav > a {
 
 nav > a:hover {
   background-color: orange;
-  text-decoration: underline;
-
 }
 
 #logo {
@@ -98,7 +96,7 @@ nav > a:hover {
 #login input[type="submit"] {
   color: white;
   background-color: rgba(0, 0, 0, 0);
-  background-image: url("../img/login.png");
+  background-image: url("login.png");
   background-position: center;
   background-size: 100% 80%;
   background-repeat: no-repeat;

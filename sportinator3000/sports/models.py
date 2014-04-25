@@ -25,6 +25,10 @@ class Place(models.Model):
     description = models.TextField()
     date_added = models.DateTimeField(default=datetime.now())
 
+    @classmethod
+    def get_all(cls):
+        return cls.objects.all()
+
     def __str__(self):
         return '{}, {}, {}'.format(self.name, self.city, self.address)
 
@@ -32,6 +36,10 @@ class Place(models.Model):
 class Sport(models.Model):
     name = models.CharField(max_length=100)
     photo_url = models.CharField(max_length=300, blank=True)
+
+    @classmethod
+    def get_all(cls):
+        return cls.objects.all()
 
     def __str__(self):
         return '{}'.format(self.name)
@@ -45,6 +53,10 @@ class Activity(models.Model):
     duration = models.IntegerField()
     worktime = models.CharField(max_length=50)
 
+    @classmethod
+    def get_all(cls):
+        return cls.objects.all()
+
     def __str__(self):
         return '{}'.format(self.name)
 
@@ -53,5 +65,25 @@ class PlaceActivity(models.Model):
     place = models.ForeignKey(Place)
     activity = models.ForeignKey(Activity)
 
+    @classmethod
+    def get_all(cls):
+        return cls.objects.all()
+
+    @classmethod
+    def get_by_sport(cls, sport_name):
+        return cls.objects.filter(activity__sport__name=sport_name)
+
+    @classmethod
+    def get_by_city(cls, city_name):
+        return cls.objects.filter(place__city=city_name)
+
+    @classmethod
+    def get_by_sport_and_city(cls, sport_name, city_name):
+        return cls.objects.filter(place__city=city_name, activity__sport__name=sport_name)
+
     def __str__(self):
         return '{}'.format(self.place)
+    
+    @classmethod
+    def costs_lower_than(cls, data_list, costs):
+        return data_list.filter(activity__price__lte=costs)
