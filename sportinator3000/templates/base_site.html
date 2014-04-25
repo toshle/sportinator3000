@@ -2,34 +2,33 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>title</title>
+  <title>Спортинатор</title>
   <link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <header>
       <nav>
         <a href="#">Начало</a>
-        <a href="#">Sports</a>
-        <a href="#">Events</a>
-        <a href="#">Profile</a>
-        <a href="#">пръдня</a>
+        <a href="#">Спортове</a>
+        <a href="#">Събития</a>
+        <a href="#">Профил</a>
+        <a href="#">За нас</a>
       </nav>
       <div id="logo">
-        <h1>Sportinator</h1>
+        <h1>Спортинатор</h1>
       </div>
       <div id="login">
-        <form>
-          <input type="submit" name="submit" value=">" />
-          <input type="text" name="username"/><br />
-          <input type="password" name="password"/>
+        <form method="post">
+          <input type="submit" name="submit" value="" />
+          <input type="text" placeholder="Username" name="username"/><br />
+          <input type="password" placeholder="Password" name="password"/>
         </form>
+        <a href="#">Регистрация</a> / <a href="#">Забравена парола</a>
       </div>
     </header>
-    <main>
-      
-    </main>
+    {% block main %}{% endblock %}
     <footer>
-      Made by #ПодайМонстъраТам
+      <a href="#">#ПодайМонстъраТам</a>
     </footer>
 </body>
 </html>
