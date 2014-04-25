@@ -29,10 +29,6 @@ class Place(models.Model):
     def get_all(cls):
         return cls.objects.all()
 
-    @classmethod
-    def get_city(cls, city_name):
-        return cls.objects.filter(city=city_name)
-
     def __str__(self):
         return '{}, {}, {}'.format(self.name, self.city, self.address)
 
@@ -44,10 +40,6 @@ class Sport(models.Model):
     @classmethod
     def get_all(cls):
         return cls.objects.all()
-
-    @classmethod
-    def get_sport(cls, sport_name):
-        return cls.objects.filter(name=sport_name)
 
     def __str__(self):
         return '{}'.format(self.name)
@@ -65,10 +57,6 @@ class Activity(models.Model):
     def get_all(cls):
         return cls.objects.all()
 
-    @classmethod
-    def get_activities(cls, activity_by_sport):
-        return cls.objects.filter(sport=Sport.get_sport(activity_by_sport))
-
     def __str__(self):
         return '{}'.format(self.name)
 
@@ -83,16 +71,19 @@ class PlaceActivity(models.Model):
 
     @classmethod
     def get_by_sport(cls, sport_name):
-        return cls.objects.filter(activity=Activity.get_activities(sport_name))
+        return cls.objects.filter(activity__sport__name=sport_name)
 
     @classmethod
     def get_by_city(cls, city_name):
-        return cls.objects.filter(place=Place.get_city(city_name))
+        return cls.objects.filter(place__city=city_name)
 
     @classmethod
     def get_by_sport_and_city(cls, sport_name, city_name):
-        return cls.get_by_city(city_name).filter(activity=Activity.get_activities(sport_name))
-
+        return cls.objects.filter(place__city=city_name, activity__sport__name=sport_name)
 
     def __str__(self):
         return '{}'.format(self.place)
+    
+    @classmethod
+    def costs_lower_than(cls, data_list, costs):
+        return data_list.filter(activity__price__lte=costs)
