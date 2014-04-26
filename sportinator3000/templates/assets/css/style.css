@@ -6,8 +6,7 @@ body {
   bottom: 0;
   margin: 0;
   font-family: Verdana;
-  background-image: url('map.png');
-  background-size: cover;
+  background-color: #F1EEE8;
 }
 
 a {
@@ -96,7 +95,7 @@ nav > a:hover {
 #login input[type="submit"] {
   color: white;
   background-color: rgba(0, 0, 0, 0);
-  background-image: url("login.png");
+  background-image: url("/assets/img/login.png");
   background-position: center;
   background-size: 100% 80%;
   background-repeat: no-repeat;
@@ -130,8 +129,7 @@ nav > a:hover {
 
 #options input[type="range"] {
   height: 15px;
-  background: none;
-  margin: 0 20px 0 20px;
+  background: none;  margin: 0 20px 0 20px;
 }
 
 #search_tools {

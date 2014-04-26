@@ -3,9 +3,10 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Спортинатор</title>
-  <link href="/css/style.css" rel="stylesheet" type="text/css" />
+  <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+<<<<<<< HEAD
     <header>
       <nav>
         <a href="/home">Начало</a>
@@ -34,10 +35,44 @@
       </div>
     </header>
     <main>
+=======
+  <header>
+    <nav>
+    <a href="/home">Начало</a>
+    <a href="/sports">Спортове</a>
+    <a href="#">Събития</a>
+    <a href="#">Профил</a>
+    <a href="#">За нас</a>
+    </nav>
+    <div id="logo">
+    <h1><a href="/home">Спортинатор</a></h1>
+    </div>
+    <div id="login">
+    {% if not user.is_active %}
+    <form method="post" action="/login">{% csrf_token %}
+      <input type="submit" name="submit" value="" />
+      <input type="text" placeholder="Username" name="username"/>
+      <br />
+      <input type="password" placeholder="Password" name="password"/>
+    </form>
+    <a href="#">Регистрация</a> / <a href="#">Забравена парола</a>
+    {% else %}
+      Здравей, {% firstof user.get_short_name user.get_username %}. 
+      <br />
+      <a href="/logout">Изход</a>
+    {% endif %}
+    </div>
+  </header>
+  <main>
+>>>>>>> f819b03e17662e06b98620dafac082e40b6b88d3
     {% block main %}{% endblock %}
-    </main>
-    <footer>
-      <a href="#">#ПодайМонстъраТам</a>
-    </footer>
+  </main>
+
+  <footer>
+    <a href="#">#ПодайМонстъраТам</a>
+  </footer>
+
+  <!-- <script src="/assets/js/map.js"></script> -->
+  <script src="/assets/js/slide.js"></script>
 </body>
 </html>
