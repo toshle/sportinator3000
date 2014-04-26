@@ -12,6 +12,7 @@ Map.PlaceMarkers = function(url) {
   };
 
   function placeMarkers(Objects) {
+    console.log(Objects);
     for (var Index in Objects) {
       var MarkerObj = Objects[Index];
 
@@ -29,6 +30,7 @@ Map.PlaceMarkers = function(url) {
       });
 
       google.maps.event.addListener(Marker, 'click', Map.OpenInfo);
+      google.maps.event.addListener(Map.Map, 'click', Map.AddMarker);
     }
   }
 };
@@ -37,10 +39,21 @@ Map.PlaceAllMarkers = function() {
   Map.PlaceMarkers('api/all');
 };
 
+Map.PlaceFilteredMarkers = function() {
+  Map.PlaceMarkers('api/filters?latitude=' + Map.Position.k +
+      '&longitude=' + Map.Position.A + '&radius=' + Map.SearchRadius
+      );
+};
+
 Map.OpenInfo = function() {
   this.Info.open(Map.Map, this);
   var Marker = this;
   setTimeout(function() {
     Marker.Info.close();
   }, 3000);
+};
+
+Map.AddMarker = function() {
+  console.log(this);
+  // this.Info.open(Map.Map, this);
 };

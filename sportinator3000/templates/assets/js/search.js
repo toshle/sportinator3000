@@ -8,11 +8,15 @@
       fillOpacity: 0.35,
       map: Map.Map,
       center: Map.Position,
-      radius: Map.SearchRadius
+      radius: Map.SearchRadius * 1000
     };
 
     Map.Circle = new google.maps.Circle(populationOptions);
-
-    Map.PlaceFileredMarkers();
+    Map.PlaceFilteredMarkers();
+    Map.BindSearchControls();
   };
 })();
+
+Map.BindSearchControls = function() {
+  console.log('asdf');
+}

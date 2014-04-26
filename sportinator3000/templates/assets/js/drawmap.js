@@ -11,7 +11,7 @@ Map = {};
 
   Map.Position = new google.maps.LatLng(window.pos.lat, window.pos.lng);
 
-  Map.SearchRadius = 150;
+  Map.SearchRadius = 1;
 
   Map.Options = {
       zoom: 16,
@@ -23,9 +23,9 @@ Map = {};
 
   function LoadMap() {
     Map.Map = new google.maps.Map(Map.Host, Map.Options);
-    if (Map.PlaceAllMarkers !== undefined)
-      Map.PlaceAllMarkers();
-    else if (Map.DrawRadius !== undefined)
+    if (Map.DrawRadius !== undefined)
       Map.DrawRadius();
+    else if (Map.PlaceAllMarkers !== undefined)
+      Map.PlaceAllMarkers();
   }
 })();
