@@ -135,7 +135,7 @@ def nearby(request):
             'video_url': place.video_url,
             'date_added': place.date_added}
         context.append(json_place)
-    return render(request, 'sports/sports_contents.html', {})
+    return render(request, 'sports/sports_contents.html', {'places': context})
 
 
 def user_profile(request, user_id):
