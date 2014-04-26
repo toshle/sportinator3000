@@ -26,7 +26,7 @@
       New = document.createElement('main');
 
     New.innerHTML = text;
-    document.getElementById('map').appendChild(New);
+    document.getElementsByTagName('body')[0].appendChild(New);
 
     Old.className = 'old';
     Old.parentNode.removeChild(Old);

@@ -5,7 +5,9 @@
   <title>Спортинатор</title>
   <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
 </head>
-<body id="map">
+<body>
+  <article></article>
+
   <header>
     <nav>
     <a href="/home">Начало</a>
@@ -24,14 +26,14 @@
       <input type="submit" name="submit" value="" />
       <input type="text" placeholder="Потребителско име" name="username" required />
       <br />
-      <input type="password" placeholder="Парола" name="password"required />
+      <input type="password" placeholder="Парола" name="password" required />
     </form>
     <a href="" id="register_link">Регистрация</a> / <a href="#">Забравена парола</a>
     </div>
     {% else %}
-      <div id="logged_in">
-        Здравей, {% firstof user.get_short_name user.get_username %} | <a href="/logout">Изход</a>
-      </div>
+      Здравей, {% firstof user.get_short_name user.get_username %}.
+      <br />
+      <a href="/logout">Изход</a>
     {% endif %}
   </header>
   <main>
@@ -67,7 +69,8 @@
   </div>
   {% endif %}
 
-  <!-- <script src="/assets/js/map.js"></script> -->
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+  <script src="/assets/js/map.js"></script>
   <script src="/assets/js/slide.js"></script>
   <script src="/assets/js/popups.js"></script>
 </body>
