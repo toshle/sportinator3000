@@ -239,7 +239,7 @@ img {
   }
 }
 
-#profile {
+#content {
   position: absolute;
   overflow: auto;
   top: 100px;
@@ -271,21 +271,21 @@ img {
   border-radius: 10px;
 }
 
-#profile table {
+#content table {
   width: 600px;
   margin: auto;
   margin-top: 10px;
 }
 
-#profile td {
+#content td {
   padding: 2px;
 }
 
-#profile .field {
+#content .field {
   color: white;
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-#profile .value {
+#content .value {
   border-bottom: 1px solid rgba(0, 0, 0, 0.8);
 }
