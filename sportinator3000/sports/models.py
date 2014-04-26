@@ -58,12 +58,15 @@ class Activity(models.Model):
         return cls.objects.all()
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return '{} {}'.format(self.name, self.price)
 
 
 class PlaceActivity(models.Model):
     place = models.ForeignKey(Place)
     activity = models.ForeignKey(Activity)
+
+    def __str__(self):
+        return '{} price {}'.format(self.place, self.activity)
 
     @classmethod
     def get_all(cls):
@@ -80,10 +83,15 @@ class PlaceActivity(models.Model):
     @classmethod
     def get_by_sport_and_city(cls, sport_name, city_name):
         return cls.objects.filter(place__city=city_name, activity__sport__name=sport_name)
-
-    def __str__(self):
-        return '{}'.format(self.place)
     
     @classmethod
     def costs_lower_than(cls, data_list, costs):
-        return data_list.filter(activity__price__lte=costs)
+        return data_list.filter(activity__price__lte=costs).order_by('activity__price') # if limit needed  [:30]
+
+    @classmethod
+    def order_ascending_by_price(cls, data_list):
+        return data_list.order_by('activity__price')
+
+    @classmethod
+    def order_descending_by_price(cls, data_list):
+        return data_list.order_by('-activity__price')
