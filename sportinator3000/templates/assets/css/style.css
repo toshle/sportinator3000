@@ -155,13 +155,13 @@ input {
 }
 
 #register_popup div {
-   width:300px;
-   margin: 10% auto;
-   background-color: rgba(255, 255,255, 0.7);
-   border:1px solid rgba(0, 0, 0, 0.5);
-   padding:15px;
-   text-align:center;
-   border-radius: 10px;
+  width: 300px;
+  margin: 10% auto;
+  background-color: rgba(255, 255,255, 0.7);
+  border:1px solid rgba(0, 0, 0, 0.5);
+  padding:15px;
+  text-align:center;
+  border-radius: 10px;
 }
 
 #logged_in {
@@ -212,4 +212,16 @@ img {
   width: 400px;
   text-align: center;
   border: 1px solid black;
+}
+
+-moz-document url-prefix() {
+  select {
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+  }
+
+  a:-moz-focusring {
+    outline: transparent;
+  }
 }
