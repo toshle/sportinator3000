@@ -18,21 +18,7 @@ def home_content(request):
 
 
 def all_places(request):
-    places = Place.get_all()
-    context = []
-    for place in places:
-        json_place = {
-            'name': place.name,
-            'latitude': place.latitude,
-            'longitude': place.longitude,
-            'description': place.description,
-            'address': place.address,
-            'city': place.city,
-            'photo_url': place.photo_url,
-            'video_url': place.video_url,
-            'date_added': place.date_added}
-        context.append(json_place)
-    return HttpResponse(content=context)
+    return HttpResponse(content=Place.to_json(Place.get_all()))
 
 
 def sports(request):
@@ -62,21 +48,9 @@ def sports(request):
                                                place.place.longitude)
                     <= radius]
 
-    context = []
-    for place in close_places:
-        json_place = {
-            'name': place.place.name,
-            'latitude': place.place.latitude,
-            'longitude': place.place.longitude,
-            'description': place.place.description,
-            'address': place.place.address,
-            'city': place.place.city,
-            'photo_url': place.place.photo_url,
-            'video_url': place.place.video_url,
-            'date_added': place.place.date_added}
-        context.append(json_place)
     return render(request, 'sports/sports.html',
-                  {'json_places': context, 'places': close_places,
+                  {'json_places': Place.to_json(close_places),
+                   'places': close_places,
                    'sports': Sport.objects.all()})
 
 
@@ -107,21 +81,9 @@ def sports_content(request):
                                                place.place.longitude)
                     <= radius]
 
-    context = []
-    for place in close_places:
-        json_place = {
-            'name': place.place.name,
-            'latitude': place.place.latitude,
-            'longitude': place.place.longitude,
-            'description': place.place.description,
-            'address': place.place.address,
-            'city': place.place.city,
-            'photo_url': place.place.photo_url,
-            'video_url': place.place.video_url,
-            'date_added': place.place.date_added}
-        context.append(json_place)
     return render(request, 'sports/sports_content.html',
-                  {'json_places': context, 'places': close_places,
+                  {'json_places': Place.to_json(close_places),
+                   'places': close_places,
                    'sports': Sport.objects.all()})
 
 
