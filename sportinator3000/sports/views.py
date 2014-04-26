@@ -23,6 +23,14 @@ def sports_content(request):
     return render(request, 'sports/sports_content.html', {})
 
 
+def about(request):
+    return render(request, 'sports/about.html', {})
+
+
+def about_content(request):
+    return render(request, 'sports/about_content.html', {})
+
+
 def user_login(request):
     username = request.POST['username']
     password = request.POST['password']
