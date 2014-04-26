@@ -1,22 +1,28 @@
-(function(){
-// document.getElementById('map').style.background='url(\'asdf\')';
-var API = document.createElement("script");
+(function() {
+  var Host = document.getElementsByTagName('article')[0],
+    Options = {
+      zoom: 16,
+      center: new google.maps.LatLng(42.68730, 23.33422),
+      disableDefaultUI: true
+    };
 
-map = new OpenLayers.Map("map");
-map.addLayer(new OpenLayers.Layer.OSM());
+function LoadMap() {
+  var Map = new google.maps.Map(Host, Options),
 
-var lonLat = new OpenLayers.LonLat( -0.1279688 ,51.5077286 )
-  .transform(
-      new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-      map.getProjectionObject() // to Spherical Mercator Projection
-      );
+    Marker = new google.maps.Marker({
+      position: new google.maps.LatLng(42.68730, 23.33422),
+      map: Map,
+      title: 'Hello World!'
+    }),
 
-  var zoom=16;
+    Info = new google.maps.InfoWindow({
+      content: 'Test'
+    });
 
-  var markers = new OpenLayers.Layer.Markers( "Markers" );
-  map.addLayer(markers);
+  google.maps.event.addListener(Marker, 'click', function() {
+    Info.open(Map, Marker);
+  });
+}
 
-  markers.addMarker(new OpenLayers.Marker(lonLat));
-
-  map.setCenter (lonLat, zoom);
+google.maps.event.addDomListener(window, 'load', LoadMap);
 })();

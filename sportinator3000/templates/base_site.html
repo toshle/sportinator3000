@@ -5,7 +5,9 @@
   <title>Спортинатор</title>
   <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
 </head>
-<body id="map">
+<body>
+  <article></article>
+
   <header>
     <nav>
     <a href="/home">Начало</a>
@@ -27,7 +29,7 @@
     </form>
     <a href="#">Регистрация</a> / <a href="#">Забравена парола</a>
     {% else %}
-      Здравей, {% firstof user.get_short_name user.get_username %}. 
+      Здравей, {% firstof user.get_short_name user.get_username %}.
       <br />
       <a href="/logout">Изход</a>
     {% endif %}
@@ -41,7 +43,8 @@
     <a href="#">#ПодайМонстъраТам</a>
   </footer>
 
-  <!-- <script src="/assets/js/map.js"></script> -->
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+  <script src="/assets/js/map.js"></script>
   <script src="/assets/js/slide.js"></script>
 </body>
 </html>
