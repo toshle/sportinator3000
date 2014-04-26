@@ -18,5 +18,5 @@
 })();
 
 Map.BindSearchControls = function() {
-  console.log('asdf');
+  // alert('asdf');
 }

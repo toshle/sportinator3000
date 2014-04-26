@@ -25,8 +25,10 @@ Map.PlaceMarkers = function(url) {
         title: MarkerObj.name
       });
 
+        console.log(MarkerObj);
       Marker.Info = new google.maps.InfoWindow({
-        content: MarkerObj.description
+        content: '<a style="color: #357" href="details/' + MarkerObj.id + '">' +
+          MarkerObj.description + '</a>'
       });
 
       google.maps.event.addListener(Marker, 'click', Map.OpenInfo);
