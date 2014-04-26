@@ -1,12 +1,24 @@
-<form id="options" method="post">
-  <select name="sports">
-    <option value="" style="display: none;" selected disabled>Спорт</option>
-    <option value="football">Футбол</option>
-    <option value="basketball">Баскетбол</option>
-    <option value="fitness">Фитнес</option>
-    <option value="golf">Голф</option>
-  </select>
+<div id="search_tools">
+    <form id="options" method="post">
+        <select name="sports">
+        <option value="" style="display: none;" selected disabled>Спорт</option>
+        <option value="football">Футбол</option>
+        <option value="basketball">Баскетбол</option>
+        <option value="fitness">Фитнес</option>
+        <option value="golf">Голф</option>
+        </select>
 
-  Обхват: 0<input type="range" name="points" min="1" max="10">100
+        <select name="period">
+        <option value="" style="display: none;" selected disabled>Продължителност</option>
+        <option value="hour">1 час</option>
+        <option value="two_hours">2 часа</option>
+        <option value="week">седмица</option>
+        <option value="month">месец</option>
+        <option value="year">година</option>
+        </select>
 
-</form>
+        Обхват: 0<input type="range" name="points" min="1" max="100">100
+        Цена: 0<input type="range" name="price" min="1" max="100">200
+
+    </form>
+</div>
