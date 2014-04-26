@@ -58,6 +58,15 @@ def user_register(request):
     return render(request, 'sports/home.html', {})
 
 
+def place_register_form(request):
+    place = Place(request.POST['name'], request.POST['city'],
+                  request.POST['address'], request.POST['photo_url'],
+                  request.POST['video_url'], request.POST['latitude'],
+                  request.POST['longitude'], request.POST['description'],
+                  request.POST['date_added'])
+    return render(request, 'sports/detail.html', {})
+
+
 def nearby(request):
     latitude1 = request.POST['latitude']
     longitude1 = request.POST['latitude']
