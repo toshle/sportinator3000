@@ -1,10 +1,11 @@
 <form id="options" method="post">
         <select name="sports">
+        {% if sports %}
+            {% for sport in sports %}
+                <option value="{{sport.id}}">{{sport.name}}</option>
+            {% endfor %}
         <option value="" style="display: none;" selected disabled>Спорт</option>
-        <option value="football">Футбол</option>
-        <option value="basketball">Баскетбол</option>
-        <option value="fitness">Фитнес</option>
-        <option value="golf">Голф</option>
+        {% endif %}
         </select>
 
         <select name="period">

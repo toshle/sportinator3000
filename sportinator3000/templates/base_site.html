@@ -28,7 +28,7 @@
       <br />
       <input type="password" placeholder="Парола" name="password" required />
     </form>
-    <a href="" id="register_link">Регистрация</a> / <a href="#">Забравена парола</a>
+    <a href="" id="register_link">Регистрация</a> / <a id="forgotten_link" href="">Забравена парола</a>
     </div>
     {% else %}
     <div id="logged_in">
@@ -64,6 +64,20 @@
           <input type="email" name="email" required placeholder="Email адрес" />
           <br />
           <input type="submit" name="submit" value="Регистрирай се" />
+      </form>
+    </div>
+  </div>
+
+  <div id="forgotten_popup">
+    <div id="forgotten_form">
+      Забравена парола
+      <form method="post" action="/forgotten_password">
+          {% csrf_token %}
+          <input placeholder="Потребителско име" type="text" name="username" required />
+          <br />
+          <input type="email" name="email" required placeholder="Email адрес" />
+          <br />
+          <input type="submit" name="submit" value="Изпрати" />
       </form>
     </div>
   </div>

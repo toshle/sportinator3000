@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 import math
 from sports.models import Place, PlaceActivity, Activity, Sport
 import json
+from random import randint
+import hashlib
+from django.core.mail import send_mail
 
 
 def home(request):
@@ -50,14 +53,6 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return render(request, 'sports/home.html', {})
-
-
-def user_register_form(request):
-    notifications = []
-    if request.user.is_authenticated():
-        notifications.append("Вече сте логнат.")
-        return render(request, 'sports/home.html', {'messages': notifications})
-    return render(request, 'sports/register.html', {})
 
 
 def user_register(request):
@@ -118,7 +113,11 @@ def nearby(request):
 
         return arc*6373
 
-    close_places = [place for place in Place.objects.all()
+    close_places = [place for place in
+                    Place.objects.filter(
+                        activity__sport__name=request.POST['sport'],
+                        activity__duration=request.POST['duration'],
+                        activity__price__lte=request.POST['price'])
                     if self.distance_between_points(latitude1, longitude1,
                                                     place.latitude,
                                                     place.longitude) <= radius]
@@ -136,6 +135,7 @@ def nearby(request):
             'video_url': place.video_url,
             'date_added': place.date_added}
         context.append(json_place)
+    return render(request, 'sports/sports_contents.html', {'places': context})
 
 
 def user_profile(request, user_id):
@@ -147,6 +147,7 @@ def user_profile(request, user_id):
         notifications.append("Не сте логнат.")
         return render(request, 'sports/home.html', {'messages': notifications})
 
+
 def user_profile_content(request, user_id):
     notifications = []
     if request.user.is_authenticated():
@@ -156,3 +157,17 @@ def user_profile_content(request, user_id):
         notifications.append("Не сте логнат.")
         return render(request, 'sports/home.html', {'messages': notifications})
 
+
+def user_forgotten(request):
+    notifications = []
+    if request.user.is_authenticated():
+        notifications.append("Вече сте логнат.")
+        return render(request, 'sports/home.html', {'messages': notifications})
+    user = User.objects.get(username = request.POST['username'],
+                            email = request.POST['email'])
+    new_password = hashlib.sha224(str(randint(1, 100000000)).encode('utf-8')).hexdigest()[0:6]
+    user.set_password(new_password)
+    user.email_user("Новата ви парола", "Новата ви парола е " + new_password)
+    user.save()
+    notifications.append("Изпратена ви е нова парола на " + request.POST['email'])
+    return render(request, 'sports/home.html', {'messages': notifications})
