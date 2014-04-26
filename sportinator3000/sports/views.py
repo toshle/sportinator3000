@@ -140,7 +140,7 @@ def nearby(request):
 def user_profile(request, user_id):
     notifications = []
     if request.user.is_authenticated():
-        user = User.objects.get(pk=user_id)
+        user = get_object_or_404(User, pk=user_id)
         return render(request, 'sports/profile.html', {'user': user})
     else:
         notifications.append("Не сте логнат.")
