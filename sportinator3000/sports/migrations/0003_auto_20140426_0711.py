@@ -13,13 +13,8 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='activity',
-            name='has_trainer',
-            field=models.BooleanField(default=True),
-        ),
-        migrations.AlterField(
             model_name='place',
             name='date_added',
-            field=models.DateTimeField(default=datetime.datetime(2014, 4, 26, 3, 42, 38, 448572)),
+            field=models.DateTimeField(default=datetime.datetime(2014, 4, 26, 7, 11, 26, 835991)),
         ),
     ]

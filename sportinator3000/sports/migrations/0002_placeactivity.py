@@ -14,9 +14,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PlaceActivity',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
-                ('place', models.ForeignKey(to_field='id', to='sports.Place')),
-                ('activity', models.ForeignKey(to_field='id', to='sports.Activity')),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('place', models.ForeignKey(to='sports.Place', to_field='id')),
+                ('activity', models.ForeignKey(to='sports.Activity', to_field='id')),
             ],
             options={
             },

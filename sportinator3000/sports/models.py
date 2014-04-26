@@ -83,11 +83,13 @@ class PlaceActivity(models.Model):
 
     @classmethod
     def get_by_sport_and_city(cls, sport_name, city_name):
-        return cls.objects.filter(place__city=city_name, activity__sport__name=sport_name)
-    
+        return cls.objects.filter(place__city=city_name,
+                                  activity__sport__name=sport_name)
+
     @classmethod
     def costs_lower_than(cls, data_list, costs):
-        return data_list.filter(activity__price__lte=costs).order_by('activity__price') # if limit needed  [:30]
+        return data_list.filter(activity__price__lte=costs)\
+            .order_by('activity__price')
 
     @classmethod
     def order_ascending_by_price(cls, data_list):
