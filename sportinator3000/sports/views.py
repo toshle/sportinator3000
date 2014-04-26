@@ -118,7 +118,11 @@ def nearby(request):
 
         return arc*6373
 
-    close_places = [place for place in Place.objects.all()
+    close_places = [place for place in
+                    Place.objects.filter(
+                        activity__sport__name=request.POST['sport'],
+                        activity__duration=request.POST['duration'],
+                        activity__price__lte=request.POST['price'])
                     if self.distance_between_points(latitude1, longitude1,
                                                     place.latitude,
                                                     place.longitude) <= radius]
@@ -136,6 +140,7 @@ def nearby(request):
             'video_url': place.video_url,
             'date_added': place.date_added}
         context.append(json_place)
+    return render(request, 'sports/sports_contents.html', {})
 
 
 def user_profile(request, user_id):
