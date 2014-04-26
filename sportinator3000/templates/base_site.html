@@ -13,9 +13,6 @@
     <nav>
     <a href="/home">Начало</a>
     <a href="/sports">Търсене</a>
-    {% if user.is_active %}
-    <a href="/profile/{{ user.id }}">Профил</a>
-    {% endif %}
     <a href="/about">За нас</a>
     </nav>
     <div id="logo">
@@ -33,7 +30,7 @@
     </div>
     {% else %}
     <div id="logged_in">
-      Здравей, {% firstof user.get_short_name user.get_username %} | <a href="/logout">Изход</a>
+      Здравей, <a href="/profile/{{ user.id }}">{% firstof user.get_short_name user.get_username %}</a> | <a href="/logout">Изход</a>
     </div>
     {% endif %}
   </header>

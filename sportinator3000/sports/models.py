@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
+import json
 
 
 CITIES = (
@@ -30,6 +31,23 @@ class Place(models.Model):
     @classmethod
     def get_all(cls):
         return cls.objects.all()
+
+    @classmethod
+    def to_jason(cls, places):
+        context = []
+        for place in places:
+            json_place = {
+                'name': place.place.name,
+                'latitude': place.place.latitude,
+                'longitude': place.place.longitude,
+                'description': place.place.description,
+                'address': place.place.address,
+                'city': place.place.city,
+                'photo_url': place.place.photo_url,
+                'video_url': place.place.video_url,
+                'date_added': place.place.date_added}
+            context.append(json_place)
+        return json.dumps(context)
 
     def __str__(self):
         return '{}, {}, {}'.format(self.name, self.city, self.address)

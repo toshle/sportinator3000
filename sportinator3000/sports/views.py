@@ -6,6 +6,7 @@ from django.http import HttpResponse
 import math
 from sports.models import Place, PlaceActivity, Activity, Sport
 import json
+from django.shortcuts import redirect
 
 
 def home(request):
@@ -17,21 +18,7 @@ def home_content(request):
 
 
 def all_places(request):
-    places = Place.get_all()
-    context = []
-    for place in places:
-        json_place = {
-            'name': place.name,
-            'latitude': place.latitude,
-            'longitude': place.longitude,
-            'description': place.description,
-            'address': place.address,
-            'city': place.city,
-            'photo_url': place.photo_url,
-            'video_url': place.video_url,
-            'date_added': place.date_added}
-        context.append(json_place)
-    return HttpResponse(content=context)
+    return HttpResponse(content=Place.to_json(Place.get_all()))
 
 
 def sports(request):
@@ -61,21 +48,9 @@ def sports(request):
                                                place.place.longitude)
                     <= radius]
 
-    context = []
-    for place in close_places:
-        json_place = {
-            'name': place.place.name,
-            'latitude': place.place.latitude,
-            'longitude': place.place.longitude,
-            'description': place.place.description,
-            'address': place.place.address,
-            'city': place.place.city,
-            'photo_url': place.place.photo_url,
-            'video_url': place.place.video_url,
-            'date_added': place.place.date_added}
-        context.append(json_place)
     return render(request, 'sports/sports.html',
-                  {'json_places': context, 'places': close_places,
+                  {'json_places': Place.to_json(close_places),
+                   'places': close_places,
                    'sports': Sport.objects.all()})
 
 
@@ -106,21 +81,9 @@ def sports_content(request):
                                                place.place.longitude)
                     <= radius]
 
-    context = []
-    for place in close_places:
-        json_place = {
-            'name': place.place.name,
-            'latitude': place.place.latitude,
-            'longitude': place.place.longitude,
-            'description': place.place.description,
-            'address': place.place.address,
-            'city': place.place.city,
-            'photo_url': place.place.photo_url,
-            'video_url': place.place.video_url,
-            'date_added': place.place.date_added}
-        context.append(json_place)
     return render(request, 'sports/sports_content.html',
-                  {'json_places': context, 'places': close_places,
+                  {'json_places': Place.to_json(close_places),
+                   'places': close_places,
                    'sports': Sport.objects.all()})
 
 
@@ -172,6 +135,23 @@ def user_register(request):
     notifications.append("Регистрирахте се успешно.")
     return render(request, 'sports/home.html', {'messages': notifications})
 
+def user_edit(request):
+    notifications = []
+    if request.user.is_authenticated():
+        if request.user.check_password(request.POST['old_password']):
+          request.user.first_name = request.POST['first_name']
+          request.user.last_name = request.POST['last_name']
+          new_password = request.POST['new_password']
+          if new_password and new_password == request.POST['new_password_repeat']:
+              request.user.set_password(new_password)
+          request.user.save()
+          notifications.append("Успешно редактиране.")
+        else:
+          notifications.append("Грешна парола.")
+        return render(request, 'sports/profile.html', {'details': request.user, 'messages': notifications})
+    else:
+        notifications.append("Трябва да се логнете.")
+        return render(request, 'sports/home.html', {'messages': notifications})
 
 def sport_register_form(request):
     sport = Sport(request.POST['name'], request.POST['photo_url'])
@@ -206,7 +186,7 @@ def user_profile(request, user_id):
     notifications = []
     if request.user.is_authenticated():
         user = get_object_or_404(User, pk=user_id)
-        return render(request, 'sports/profile.html', {'user': user})
+        return render(request, 'sports/profile.html', {'details': user})
     else:
         notifications.append("Не сте логнат.")
         return render(request, 'sports/home.html', {'messages': notifications})
@@ -216,7 +196,7 @@ def user_profile_content(request, user_id):
     notifications = []
     if request.user.is_authenticated():
         user = get_object_or_404(User, pk=user_id)
-        return render(request, 'sports/profile_content.html', {'user': user})
+        return render(request, 'sports/profile_content.html', {'details': user})
     else:
         notifications.append("Не сте логнат.")
         return render(request, 'sports/home.html', {'messages': notifications})

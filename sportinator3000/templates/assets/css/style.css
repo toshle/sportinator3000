@@ -180,7 +180,13 @@ input {
 }
 
 #logged_in {
+  font-size: 14px;
   padding-bottom: 10px;
+}
+
+#logged_in a {
+  font-size: 14px;
+  text-decoration: underline;
 }
 
 #about_us {
@@ -219,9 +225,13 @@ img {
   text-indent: 0px;
 }
 
-#notifications {
+#notifications {position:absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+  z-index: 1001;
   color: white;
-  margin: auto;
   width: 400px;
   text-align: center;
   border: 1px solid black;
@@ -281,7 +291,8 @@ img {
   text-align: left;
   width: 600px;
   margin: auto;
-  margin-top: 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 #content td {
