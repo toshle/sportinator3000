@@ -3,7 +3,7 @@ from django.template import RequestContext, loader
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 import math
-from sports.models import Place, PlaceActivity
+from sports.models import Place, PlaceActivity, Activity, Sport
 import json
 
 
@@ -58,6 +58,12 @@ def user_register(request):
     return render(request, 'sports/home.html', {})
 
 
+def sport_register_form(request):
+    sport = Sport(request.POST['name'], request.POST['photo_url'])
+    sport.save()
+    return render(request, 'sports/home.html', {})
+
+
 def place_register_form(request):
     place = Place(request.POST['name'], request.POST['city'],
                   request.POST['address'], request.POST['photo_url'],
@@ -77,7 +83,6 @@ def place_activity_register_form(request):
                                             request.POST['price'],
                                             request.POST['duration'],
                                             request.POST['worktime']))
-    # place and sport are db entries
     place_activity.save()
     return render(request, 'sports/place_activity_detail.html', {})
 
