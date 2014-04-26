@@ -22,8 +22,8 @@ class Place(models.Model):
     address = models.CharField(max_length=200)
     photo_url = models.CharField(max_length=300, blank=True)
     video_url = models.CharField(max_length=300, blank=True)
-    latitude = models.IntegerField()
-    longitude = models.IntegerField()
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     description = models.TextField()
     date_added = models.DateTimeField(default=datetime.now())
 
