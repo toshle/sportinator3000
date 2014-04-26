@@ -137,6 +137,7 @@ def nearby(request):
             'date_added': place.date_added}
         context.append(json_place)
 
+
 def user_profile(request, user_id):
     notifications = []
     if request.user.is_authenticated():

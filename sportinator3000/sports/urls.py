@@ -13,8 +13,9 @@ urlpatterns = [
     url(r'^logout', views.user_logout, name='logout'),
     url(r'^register_form', views.user_register_form, name='register_form'),
     url(r'^register', views.user_register, name='register'),
-    url(r'^about', views.about, name = 'about'),
-    url(r'^raw/about', views.about_content, name = 'about_content'),
-    url(r'^profile/(?P<user_id>[0-9]+)/$', views.user_profile, name = 'profile'),
-    url(r'^raw/profile/(?P<user_id>[0-9]+)/$', views.user_profile_content, name = 'profile_content'),
+    url(r'^about', views.about, name='about'),
+    url(r'^raw/about', views.about_content, name='about_content'),
+    url(r'^profile/(?P<user_id>[0-9]+)/$', views.user_profile, name='profile'),
+    url(r'^raw/profile/(?P<user_id>[0-9]+)/$',
+        views.user_profile_content, name='profile_content'),
 ]
