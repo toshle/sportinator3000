@@ -69,8 +69,9 @@ def place_register_form(request):
 
 
 def place_activity_register_form(request):
-    place_activity = PlaceActivity(request.POST['place'],
-                                   Activity(request.POST['sport'],
+    place_activity = PlaceActivity(Place.objects.get(id=request.POST['place']),
+                                   Activity(Sport.objects
+                                            .get(id=request.POST['sport']),
                                             request.POST['activity_name'],
                                             request.POST['has_trainer'],
                                             request.POST['price'],
