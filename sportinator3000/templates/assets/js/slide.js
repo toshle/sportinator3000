@@ -25,15 +25,7 @@
   }
 
   function update(text, url) {
-    var Body = document.getElementsByTagName('body')[0],
-      Old = document.getElementsByTagName('main')[0],
-      New = document.createElement('main');
-
-    New.innerHTML = text;
-    New.className = 'new';
-    Body.appendChild(New);
-    Old.parentNode.removeChild(Old);
-    New.className = '';
+    document.getElementsByTagName('main')[0].innerHTML = text;
     history.replaceState({}, '', url);
   }
 })();

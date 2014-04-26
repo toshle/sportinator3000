@@ -35,16 +35,6 @@ main {
   padding: 0 50px 0 50px;
 }
 
-main.new {
-  transform: translate3d(0, 0, 0);
-  /* animation: floatLeft .4s ease-out both; */
-  /* z-index: 10; */
-}
-
-@keyframes floatLeft {
-    from {  }
-}
-
 footer {
   position: fixed;
   bottom: 0;
