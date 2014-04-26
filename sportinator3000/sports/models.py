@@ -37,6 +37,7 @@ class Place(models.Model):
         context = []
         for place in places:
             json_place = {
+                'id': place.id,
                 'name': place.name,
                 'latitude': place.latitude,
                 'longitude': place.longitude,
