@@ -27,6 +27,22 @@ def search_content(request):
 def all_places(request):
     return HttpResponse(content=Place.to_json(Place.get_all()))
 
+def filters(request):
+    latitude1 = float(request.GET['latitude'])
+    longitude1 = float(request.GET['longitude'])
+    radius = float(request.GET['radius'])
+
+    close_places = [place for place in 
+                    help_modules.filter_all(PlaceActivity.get_all(),
+                                request.GET.get('sport'),
+                                request.GET.get('duration'),
+                                request.GET.get('price'))
+                    if help_modules.distance_between_points(latitude1, longitude1,
+                                                            place.place.latitude,
+                                                            place.place.longitude)
+                    <= radius]
+
+    return HttpResponse(content=Place.to_json(map(lambda x: x.place, close_places)))
 
 def sports(request):
     latitude1 = float(request.GET['latitude'])
@@ -44,8 +60,7 @@ def sports(request):
                     <= radius]
 
     return render(request, 'sports/sports.html',
-                  {'json_places': Place.to_json(map(lambda x: x.place, close_places)),
-                   'places': close_places,
+                  {'places': close_places,
                    'sports': Sport.objects.all()})
 
 
