@@ -3,15 +3,19 @@ Map = {};
 (function() {
   Map.Host = document.getElementsByTagName('article')[0];
 
-  if (window.Pos === undefined)
-    window.Pos = {
+  if (window.pos === undefined)
+    window.pos = {
       lat: 42.687562,
-      len: 23.335213
+      lng: 23.335213
     };
+
+  Map.Position = new google.maps.LatLng(window.pos.lat, window.pos.lng);
+
+  Map.SearchRadius = 150;
 
   Map.Options = {
       zoom: 16,
-      center: new google.maps.LatLng(window.Pos.lat, window.Pos.lng),
+      center: Map.Position,
       disableDefaultUI: true
   };
 
@@ -19,7 +23,9 @@ Map = {};
 
   function LoadMap() {
     Map.Map = new google.maps.Map(Map.Host, Map.Options);
-    if (Map.PlaceMarkers !== undefined)
+    if (Map.PlaceAllMarkers !== undefined)
       Map.PlaceAllMarkers();
+    else if (Map.DrawRadius !== undefined)
+      Map.DrawRadius();
   }
 })();

@@ -25,7 +25,11 @@
   }
 
   function update(text, url) {
-    document.getElementsByTagName('main')[0].innerHTML = text;
+    var Old = document.getElementsByTagName('main')[0],
+      New = document.createElement('main');
+      New.innerHTML = text;
+      document.body.removeChild(Old);
+      document.body.appendChild(New);
     history.replaceState({}, '', url);
   }
 })();
