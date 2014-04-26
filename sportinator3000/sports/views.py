@@ -34,7 +34,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return render(request, 'sports/homer.html', {})
+    return render(request, 'sports/home.html', {})
 
 def get_distance(request):
     def distance_between_points(latitude1, longitude1, latitude2, longitude2): #returns distance in kilometers

@@ -30,6 +30,11 @@ main {
   padding: 0 50px 0 50px;
 }
 
+main.old {
+  position: absolute;
+  left: 100px;
+}
+
 footer {
   position: fixed;
   bottom: 0;
