@@ -9,4 +9,5 @@ urlpatterns = [
   url(r'^sports', views.sports, name = 'sports'),
   url(r'^raw/sports', views.sports_content, name = 'sports_content'),
   url(r'^raw/home/', views.home_content, name = 'home_content'),
+  url(r'^api', views.nearby, name = 'nearby'),
 ]
