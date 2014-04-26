@@ -21,17 +21,17 @@
     {% if not user.is_active %}
     <form method="post" action="/login">{% csrf_token %}
       <input type="submit" name="submit" value="" />
-      <input type="text" placeholder="Username" name="username"/>
+      <input type="text" placeholder="Потребителско име" name="username"/>
       <br />
-      <input type="password" placeholder="Password" name="password"/>
+      <input type="password" placeholder="Парола" name="password"/>
     </form>
-    <a href="/register_form">Регистрация</a> / <a href="#">Забравена парола</a>
-    {% else %}
-      Здравей, {% firstof user.get_short_name user.get_username %}. 
-      <br />
-      <a href="/logout">Изход</a>
-    {% endif %}
+    <a href="" id="register_link">Регистрация</a> / <a href="#">Забравена парола</a>
     </div>
+    {% else %}
+      <div id="logged_in">
+        Здравей, {% firstof user.get_short_name user.get_username %} | <a href="/logout">Изход</a>
+      </div>
+    {% endif %}
   </header>
   <main>
     {% block main %}{% endblock %}
@@ -41,7 +41,26 @@
     <a href="#">#ПодайМонстъраТам</a>
   </footer>
 
+  {% if not user.is_active %}
+  <div id="register_popup">
+    <div id="register_form">
+      Регистрация
+      <form method="post" action="/register">
+          {% csrf_token %}
+          <input placeholder="Потребителско име" type="text" name="username" required />
+          <br />
+          <input placeholder="Парола" type="password" name="password" required />
+          <br />
+          <input type="email" name="email" required placeholder="Email адрес" />
+          <br />
+          <input type="submit" name="submit" value="Регистрирай се" />
+      </form>
+    </div>
+  </div>
+  {% endif %}
+
   <!-- <script src="/assets/js/map.js"></script> -->
   <script src="/assets/js/slide.js"></script>
+  <script src="/assets/js/popups.js"></script>
 </body>
 </html>
