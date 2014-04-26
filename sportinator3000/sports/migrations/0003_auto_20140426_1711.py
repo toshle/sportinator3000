@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='place',
             name='date_added',
-            field=models.DateTimeField(default=datetime.datetime(2014, 4, 26, 17, 5, 30, 856665)),
+            field=models.DateTimeField(default=datetime.datetime(2014, 4, 26, 17, 11, 36, 759329)),
         ),
     ]
