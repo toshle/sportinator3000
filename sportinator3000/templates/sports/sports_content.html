@@ -1,3 +1,21 @@
+<!-- This is a simple functions, just to show the value of the slider -->
+<script>
+    function printValueRange(sliderID, textbox) {
+        var x = document.getElementById(textbox);
+        var y = document.getElementById(sliderID);
+        x.value = y.value.concat(" км");
+    }
+
+    function printValuePrice(sliderID, textbox) {
+        var x = document.getElementById(textbox);
+        var y = document.getElementById(sliderID);
+        x.value = y.value.concat(" лв");
+    }
+
+    window.onload = function() { printValueRange('range_slider', 'range_slider_value'); printValuePrice('price_slider', 'price_slider_value'); }
+</script>
+<!-- -->
+
 <form id="options" method="post">
     <select name="sport">
     {% if sports %}
@@ -13,13 +31,18 @@
         <option value="" style="display: none;" selected disabled>Продължителност</option>
         <option value="1">1 час</option>
         <option value="2">2 часа</option>
+        <option value="24">1 ден</option>
         <option value="168">седмица</option>
         <option value="720">месец</option>
+        <option value="2160">3 месеца</option>
         <option value="8760">година</option>
     </select>
 
-    Обхват: 0<input type="range" name="points" min="1" max="100">100
-    Цена: 0<input type="range" name="price" min="1" max="100">200
+    Радиус: <input id="range_slider" value="0.1" type="range" min="0.1" max="10.0" step="0.1" onchange="printValueRange('range_slider','range_slider_value')"/>
+    <input class="slider" id="range_slider_value" type="text" size="1" disabled/>
+
+    Цена:   <input id="price_slider" value="1" type="range" min="1" max="200" step="1" onchange="printValuePrice('price_slider','price_slider_value')"/>
+    <input class="slider" id="price_slider_value" type="text" size="1" disabled/>
 
 </form>
 <script src="/assets/js/search.js"></script>
