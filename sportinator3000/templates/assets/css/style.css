@@ -197,7 +197,14 @@ img {
   text-indent: 0px;
 }
 
-@-moz-document url-prefix() {
+#notifications {
+  margin: auto;
+  width: 400px;
+  text-align: center;
+  border: 1px solid black;
+}
+
+-moz-document url-prefix() {
   select {
     -moz-appearance: none;
     text-indent: 0.01px;
