@@ -18,20 +18,22 @@
       Request.send();
 
       Request.onreadystatechange = function() {
-        update(Request.responseText, abs);
+        if (Request.readyState == 4)
+          update(Request.responseText, abs);
       };
     }
   }
 
   function update(text, url) {
-    var Old = document.getElementsByTagName('main')[0],
+    var Body = document.getElementsByTagName('body')[0],
+      Old = document.getElementsByTagName('main')[0],
       New = document.createElement('main');
 
     New.innerHTML = text;
-    document.getElementsByTagName('body')[0].appendChild(New);
-
     New.className = 'new';
+    Body.appendChild(New);
     Old.parentNode.removeChild(Old);
+    New.className = '';
     history.replaceState({}, '', url);
   }
 })();
