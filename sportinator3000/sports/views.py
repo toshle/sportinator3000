@@ -57,8 +57,8 @@ def sports(request):
                         activity__duration=request.GET['duration'],
                         activity__price__lte=request.GET['price'])
                     if distance_between_points(latitude1, longitude1,
-                                                   place.place.latitude*0.000001,
-                                                   place.place.longitude*0.000001) <= radius]
+                                                   place.place.latitude,
+                                                   place.place.longitude) <= radius]
 
     context = []
     for place in close_places:
@@ -100,8 +100,8 @@ def sports_content(request):
                         activity__duration=request.GET['duration'],
                         activity__price__lte=request.GET['price'])
                     if distance_between_points(latitude1, longitude1,
-                                                   place.place.latitude*0.000001,
-                                                   place.place.longitude*0.000001) <= radius]
+                                                   place.place.latitude,
+                                                   place.place.longitude) <= radius]
 
     context = []
     for place in close_places:
