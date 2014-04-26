@@ -95,7 +95,7 @@ nav > a:hover {
 #login input[type="submit"] {
   color: white;
   background-color: rgba(0, 0, 0, 0);
-  background-image: url("login.png");
+  background-image: url("/assets/img/login.png");
   background-position: center;
   background-size: 100% 80%;
   background-repeat: no-repeat;
