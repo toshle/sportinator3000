@@ -115,21 +115,26 @@ nav > a:hover {
 }
 
 #options {
+  width: 90%;
+  margin: auto;
   color: white;
   border: 1px rgba(0, 0, 0, 0.5) solid;
   border-top: none;
-  background-color: rgba(70, 70, 70, 0.7);
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  padding: 5px;
+  background-color: rgba(70, 70, 70, 0.8);
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  text-align: center;
+  padding: 10px;
 }
 
 #options select {
   border: none;
-  height: 15px;
+  margin: 0 20px 0 20px;
+  width: 16%;
+  height: 20px;
 }
 
 #options input[type="range"] {
   height: 15px;
-  background: none;
+  background: none;  margin: 0 20px 0 20px;
 }
