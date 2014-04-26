@@ -3,9 +3,9 @@ from django.template import RequestContext, loader
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-import math
 from sports.models import Place, PlaceActivity, Activity, Sport
 import json
+import math
 
 
 def home(request):
@@ -20,7 +20,7 @@ def all_places(request):
     places = Place.get_all()
     context = []
     for place in places:
-        json_place = {
+        context.append({
             'name': place.name,
             'latitude': place.latitude,
             'longitude': place.longitude,
@@ -29,9 +29,8 @@ def all_places(request):
             'city': place.city,
             'photo_url': place.photo_url,
             'video_url': place.video_url,
-            'date_added': place.date_added}
-        context.append(json_place)
-    return HttpResponse(content=context)
+            'date_added': 'place.date_added' })
+    return HttpResponse(json.dumps(context))
 
 
 def sports(request):

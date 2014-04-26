@@ -15,11 +15,11 @@ Map = {};
       disableDefaultUI: true
   };
 
-  Map.Markers = [];
-
   google.maps.event.addDomListener(window, 'load', LoadMap);
 
   function LoadMap() {
     Map.Map = new google.maps.Map(Map.Host, Map.Options);
+    if (Map.PlaceMarkers !== undefined)
+      Map.PlaceMarkers();
   }
 })();
