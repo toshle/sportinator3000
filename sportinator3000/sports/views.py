@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext, loader
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 def home(request):
@@ -25,9 +25,13 @@ def user_login(request):
     if user is not None:
         if user.is_active:
             login(request, user)
-            return render(request, 'sports/home.hmtl', {})
+            return render(request, 'sports/home.html', {})
         else:
             return render(request, 'sports/register.html',
                           {'disabled_account': 'Disabled account'})
     else:
         return render(request, 'sports/register.html', {})
+
+def user_logout(request):
+    logout(request)
+    return render(request, 'sports/homer.html', {}}
