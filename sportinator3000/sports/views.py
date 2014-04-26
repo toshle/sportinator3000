@@ -16,6 +16,13 @@ def home(request):
 def home_content(request):
     return render(request, 'sports/home_content.html', {})
 
+def search(request):
+    return render(request, 'sports/search.html', {})
+
+
+def search_content(request):
+    return render(request, 'sports/search_content.html', {})
+
 
 def all_places(request):
     return HttpResponse(content=Place.to_json(Place.get_all()))

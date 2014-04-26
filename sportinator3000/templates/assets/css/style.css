@@ -64,7 +64,7 @@ nav {
   height: 30px;
 }
 
-nav > a {
+nav a {
   vertical-align: middle;
   display: table-cell;
   text-align: center;
@@ -73,7 +73,7 @@ nav > a {
   transition: background-color 250ms;
 }
 
-nav > a:hover {
+nav a:hover {
   background-color: orange;
 }
 
