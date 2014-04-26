@@ -7,3 +7,9 @@ def home(request):
 
 def home_content(request):
   return render(request, 'sports/home_content.html', {})
+
+def sports(request):
+  return render(request, 'sports/sports.html', {})
+
+def sports_content(request):
+  return render(request, 'sports/sports_content.html', {})
