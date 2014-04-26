@@ -12,5 +12,7 @@
     };
 
     Map.Circle = new google.maps.Circle(populationOptions);
+
+    Map.PlaceFileredMarkers();
   };
 })();

@@ -39,5 +39,8 @@ Map.PlaceAllMarkers = function() {
 
 Map.OpenInfo = function() {
   this.Info.open(Map.Map, this);
-  setTimeout(this.Info.close, 10);
+  var Marker = this;
+  setTimeout(function() {
+    Marker.Info.close();
+  }, 3000);
 };
