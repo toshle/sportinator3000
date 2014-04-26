@@ -1,9 +1,26 @@
 {% if user %}
 <div id="profile">
-  Username: {{ user.username }}<br />
-  Joined: {{ user.date_joined }}<br />
-  Last Login: {{ user.last_login }}<br />
-  Email: {{ user.email }}<br />
-  Superuser: {{ user.is_superuser }}<br />
+  <table>
+    <tr>
+      <td class="field">Потребител</td>
+      <td class="value">{{ user.username }}</td>
+    </tr>
+    <tr>
+      <td class="field">E-mail</td>
+      <td class="value">{{ user.email }}</td>
+    </tr>
+    <tr>
+      <td class="field">Регистриран на</td>
+      <td class="value">{{ user.date_joined }}</td>
+    </tr>
+    <tr>
+      <td class="field">Последно онлайн</td>
+      <td class="value">{{ user.last_login }}</td>
+    </tr>
+    <tr>
+      <td class="field">Superuser</td>
+      <td class="value">{{ user.is_superuser }}</td>
+    </tr>
+  </table>
 </div>
 {% endif %}

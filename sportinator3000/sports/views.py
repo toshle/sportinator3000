@@ -5,9 +5,6 @@ from django.contrib.auth.models import User
 import math
 from sports.models import Place, PlaceActivity, Activity, Sport
 import json
-from random import randint
-import hashlib
-from django.core.mail import send_mail
 
 
 def home(request):
@@ -18,12 +15,109 @@ def home_content(request):
     return render(request, 'sports/home_content.html', {})
 
 
-def sports(request):
-    return render(request, 'sports/sports.html', {})
+def all_places(request):
+    places = Place.get_all()
+    context = []
+    for place in places:
+        json_place = {
+            'name': place.name,
+            'latitude': place.latitude,
+            'longitude': place.longitude,
+            'description': place.description,
+            'address': place.address,
+            'city': place.city,
+            'photo_url': place.photo_url,
+            'video_url': place.video_url,
+            'date_added': place.date_added}
+        context.append(json_place)
+    return HttpResponse(content=context)
 
+
+def sports(request):
+    latitude1 = float(request.GET['latitude'])
+    longitude1 = float(request.GET['longitude'])
+    radius = float(request.GET['radius'])
+
+    def distance_between_points(latitude1, longitude1, latitude2, longitude2):
+        degrees_to_radians = math.pi/180.0
+        phi1 = (90.0 - latitude1)*degrees_to_radians
+        phi2 = (90.0 - latitude2)*degrees_to_radians
+        theta1 = longitude1*degrees_to_radians
+        theta2 = longitude2*degrees_to_radians
+        cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) +
+               math.cos(phi1)*math.cos(phi2))
+        arc = math.acos(cos)
+
+        return arc*6373
+
+    close_places = [place for place in
+                    PlaceActivity.objects.filter(
+                        activity__sport__id=request.GET['sport'],
+                        activity__duration=request.GET['duration'],
+                        activity__price__lte=request.GET['price'])
+                    if distance_between_points(latitude1, longitude1,
+                                                   place.place.latitude*0.000001,
+                                                   place.place.longitude*0.000001) <= radius]
+
+    context = []
+    for place in close_places:
+        json_place = {
+            'name': place.place.name,
+            'latitude': place.place.latitude,
+            'longitude': place.place.longitude,
+            'description': place.place.description,
+            'address': place.place.address,
+            'city': place.place.city,
+            'photo_url': place.place.photo_url,
+            'video_url': place.place.video_url,
+            'date_added': place.place.date_added}
+        context.append(json_place)
+    return render(request, 'sports/sports.html',
+                  {'json_places': context, 'places': close_places,
+                   'sports': Sport.objects.all()})
 
 def sports_content(request):
-    return render(request, 'sports/sports_content.html', {})
+    latitude1 = float(request.GET['latitude'])
+    longitude1 = float(request.GET['longitude'])
+    radius = float(request.GET['radius'])
+
+    def distance_between_points(latitude1, longitude1, latitude2, longitude2):
+        degrees_to_radians = math.pi/180.0
+        phi1 = (90.0 - latitude1)*degrees_to_radians
+        phi2 = (90.0 - latitude2)*degrees_to_radians
+        theta1 = longitude1*degrees_to_radians
+        theta2 = longitude2*degrees_to_radians
+        cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) +
+               math.cos(phi1)*math.cos(phi2))
+        arc = math.acos(cos)
+
+        return arc*6373
+
+    close_places = [place for place in
+                    PlaceActivity.objects.filter(
+                        activity__sport__id=request.GET['sport'],
+                        activity__duration=request.GET['duration'],
+                        activity__price__lte=request.GET['price'])
+                    if distance_between_points(latitude1, longitude1,
+                                                   place.place.latitude*0.000001,
+                                                   place.place.longitude*0.000001) <= radius]
+
+    context = []
+    for place in close_places:
+        json_place = {
+            'name': place.place.name,
+            'latitude': place.place.latitude,
+            'longitude': place.place.longitude,
+            'description': place.place.description,
+            'address': place.place.address,
+            'city': place.place.city,
+            'photo_url': place.place.photo_url,
+            'video_url': place.place.video_url,
+            'date_added': place.place.date_added}
+        context.append(json_place)
+    return render(request, 'sports/sports_content.html',
+                  {'json_places': context, 'places': close_places,
+                   'sports': Sport.objects.all()})
 
 
 def about(request):
@@ -53,6 +147,14 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return render(request, 'sports/home.html', {})
+
+
+def user_register_form(request):
+    notifications = []
+    if request.user.is_authenticated():
+        notifications.append("Вече сте логнат.")
+        return render(request, 'sports/home.html', {'messages': notifications})
+    return render(request, 'sports/register.html', {})
 
 
 def user_register(request):
@@ -95,49 +197,6 @@ def place_activity_register_form(request):
     place_activity.save()
     return render(request, 'sports/place_activity_detail.html', {})
 
-
-def nearby(request):
-    latitude1 = request.POST['latitude']
-    longitude1 = request.POST['latitude']
-    radius = request.POST['radius']
-
-    def distance_between_points(latitude1, longitude1, latitude2, longitude2):
-        degrees_to_radians = math.pi/180.0
-        phi1 = (90.0 - latitude1)*degrees_to_radians
-        phi2 = (90.0 - latitude2)*degrees_to_radians
-        theta1 = longitude1*degrees_to_radians
-        theta2 = longitude2*degrees_to_radians
-        cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) +
-               math.cos(phi1)*math.cos(phi2))
-        arc = math.acos(cos)
-
-        return arc*6373
-
-    close_places = [place for place in
-                    Place.objects.filter(
-                        activity__sport__name=request.POST['sport'],
-                        activity__duration=request.POST['duration'],
-                        activity__price__lte=request.POST['price'])
-                    if self.distance_between_points(latitude1, longitude1,
-                                                    place.latitude,
-                                                    place.longitude) <= radius]
-
-    context = []
-    for place in close_places:
-        json_place = {
-            'name': place.name,
-            'latitude': place.latitude,
-            'longitude': place.longitude,
-            'description': place.description,
-            'address': place.address,
-            'city': place.city,
-            'photo_url': place.photo_url,
-            'video_url': place.video_url,
-            'date_added': place.date_added}
-        context.append(json_place)
-    return render(request, 'sports/sports_contents.html', {'places': context})
-
-
 def user_profile(request, user_id):
     notifications = []
     if request.user.is_authenticated():
@@ -171,3 +230,9 @@ def user_forgotten(request):
     user.save()
     notifications.append("Изпратена ви е нова парола на " + request.POST['email'])
     return render(request, 'sports/home.html', {'messages': notifications})
+
+def place_details(request, place_id):
+    notifications = []
+    place = Place.objects.get(pk=place_id)
+    activities = PlaceActivity.objects.filter(place_id=place_id)
+    return render(request, 'sports/details.html', {'place': place, 'activities': activities})

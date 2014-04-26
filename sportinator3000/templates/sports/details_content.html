@@ -1,0 +1,16 @@
+{% if place %}
+  {{ place.name }}<br />
+  {{ place.city }}<br />
+  {{ place.address }}<br />
+  {{ place.description }}<br />
+{% endif %}
+<br />
+
+{% if activities %}
+  {% for entry in activities %}
+    {{ entry.activity.name }} <br />
+    {{ entry.activity.has_trainer }} <br />
+    {{ entry.activity.duration }} <br />
+    {{ entry.activity.worktime }} <br />
+  {% endfor %}
+{% endif %}

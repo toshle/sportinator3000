@@ -260,3 +260,24 @@ img {
   text-align:center;
   border-radius: 10px;
 }
+<<<<<<< HEAD
+=======
+
+#profile table {
+  width: 600px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+#profile td {
+  padding: 2px;
+}
+
+#profile .field {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#profile .value {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+}
