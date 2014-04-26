@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext, loader
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 import math
 from sports.models import Place
 import json
@@ -72,3 +73,10 @@ def nearby(request):
         context.append(json_place)
 
     return render(request, 'sports/nearby.html', json.dumps(context))
+
+def user_register_form(request):
+  return render(request, 'sports/register.html', {})
+
+def user_register(request):
+  user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
+  return render(request, 'sports/home.html', {})
