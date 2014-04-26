@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Sport',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('photo_url', models.CharField(blank=True, max_length=300)),
             ],
@@ -25,16 +25,16 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Place',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('name', models.CharField(unique=True, max_length=50)),
-                ('city', models.CharField(max_length=30, choices=[('Varna', 'Варна'), ('Sofia', 'София'), ('Plovdiv', 'Пловдив'), ('Stara Zagora', 'Стара Загора'), ('Montana', 'Монтана'), ('Burgas', 'Бургас'), ('Razgrad', 'Разград'), ('Ruse', 'Русе')])),
+                ('city', models.CharField(choices=[('Varna', 'Варна'), ('Sofia', 'София'), ('Plovdiv', 'Пловдив'), ('Stara Zagora', 'Стара Загора'), ('Montana', 'Монтана'), ('Burgas', 'Бургас'), ('Razgrad', 'Разград'), ('Ruse', 'Русе'), ('Jelezna', 'Железна')], max_length=30)),
                 ('address', models.CharField(max_length=200)),
                 ('photo_url', models.CharField(blank=True, max_length=300)),
                 ('video_url', models.CharField(blank=True, max_length=300)),
-                ('latitude', models.IntegerField()),
-                ('longitude', models.IntegerField()),
+                ('latitude', models.FloatField()),
+                ('longitude', models.FloatField()),
                 ('description', models.TextField()),
-                ('date_added', models.DateTimeField(default=datetime.datetime(2014, 4, 26, 7, 11, 17, 175100))),
+                ('date_added', models.DateTimeField(default=datetime.datetime(2014, 4, 26, 14, 35, 37, 881497))),
             ],
             options={
             },
@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Activity',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('sport', models.ForeignKey(to='sports.Sport', to_field='id')),
                 ('name', models.CharField(max_length=200)),
                 ('has_trainer', models.BooleanField(default=True)),
