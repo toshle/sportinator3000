@@ -36,6 +36,13 @@ def user_logout(request):
     logout(request)
     return render(request, 'sports/home.html', {})
 
+def user_register_form(request):
+  return render(request, 'sports/register.html', {})
+
+def user_register(request):
+  user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
+  return render(request, 'sports/home.html', {})
+
 def nearby(request):
     latitude1 = request.POST['latitude']
     longitude1 = request.POST['latitude']
@@ -73,10 +80,3 @@ def nearby(request):
         context.append(json_place)
 
     return render(request, 'sports/nearby.html', json.dumps(context))
-
-def user_register_form(request):
-  return render(request, 'sports/register.html', {})
-
-def user_register(request):
-  user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
-  return render(request, 'sports/home.html', {})
