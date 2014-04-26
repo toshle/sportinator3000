@@ -16,7 +16,8 @@ urlpatterns = [
     url(r'^api/all', views.all_places, name='all_places'),
     url(r'^raw/about', views.about_content, name='about_content'),
     url(r'^profile/(?P<user_id>[0-9]+)/$', views.user_profile, name='profile'),
-    url(r'^details/(?P<place_id>[0-9]+)/$', views.place_details, name='place_details'),
+    url(r'^details/(?P<place_id>[0-9]+)/$', views.place_details,
+        name='place_details'),
     url(r'^raw/profile/(?P<user_id>[0-9]+)/$',
         views.user_profile_content, name='profile_content'),
 

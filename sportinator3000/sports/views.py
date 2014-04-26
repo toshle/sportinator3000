@@ -56,9 +56,10 @@ def sports(request):
                         activity__sport__id=request.GET['sport'],
                         activity__duration=request.GET['duration'],
                         activity__price__lte=request.GET['price'])
-                    if distance_between_points(latitude1, longitude1,
-                                                   place.place.latitude,
-                                                   place.place.longitude) <= radius]
+                    if distance_between_points(latitude1, longitude1
+                                               place.place.latitude,
+                                               place.place.longitude)
+                    <= radius]
 
     context = []
     for place in close_places:
@@ -76,6 +77,7 @@ def sports(request):
     return render(request, 'sports/sports.html',
                   {'json_places': context, 'places': close_places,
                    'sports': Sport.objects.all()})
+
 
 def sports_content(request):
     latitude1 = float(request.GET['latitude'])
@@ -100,8 +102,9 @@ def sports_content(request):
                         activity__duration=request.GET['duration'],
                         activity__price__lte=request.GET['price'])
                     if distance_between_points(latitude1, longitude1,
-                                                   place.place.latitude,
-                                                   place.place.longitude) <= radius]
+                                               place.place.latitude,
+                                               place.place.longitude)
+                    <= radius]
 
     context = []
     for place in close_places:
@@ -198,6 +201,7 @@ def place_activity_register_form(request):
     place_activity.save()
     return render(request, 'sports/place_activity_detail.html', {})
 
+
 def user_profile(request, user_id):
     notifications = []
     if request.user.is_authenticated():
@@ -223,17 +227,21 @@ def user_forgotten(request):
     if request.user.is_authenticated():
         notifications.append("Вече сте логнат.")
         return render(request, 'sports/home.html', {'messages': notifications})
-    user = User.objects.get(username = request.POST['username'],
-                            email = request.POST['email'])
-    new_password = hashlib.sha224(str(randint(1, 100000000)).encode('utf-8')).hexdigest()[0:6]
+    user = User.objects.get(username=request.POST['username'],
+                            email=request.POST['email'])
+    new_password = hashlib.sha224(str(randint(1, 100000000))
+                                  .encode('utf-8')).hexdigest()[0:6]
     user.set_password(new_password)
     user.email_user("Новата ви парола", "Новата ви парола е " + new_password)
     user.save()
-    notifications.append("Изпратена ви е нова парола на " + request.POST['email'])
+    notifications.append("Изпратена ви е нова парола на " +
+                         request.POST['email'])
     return render(request, 'sports/home.html', {'messages': notifications})
+
 
 def place_details(request, place_id):
     notifications = []
     place = Place.objects.get(pk=place_id)
     activities = PlaceActivity.objects.filter(place_id=place_id)
-    return render(request, 'sports/details.html', {'place': place, 'activities': activities})
+    return render(request, 'sports/details.html',
+                  {'place': place, 'activities': activities})

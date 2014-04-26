@@ -26,6 +26,7 @@ class Place(models.Model):
     longitude = models.FloatField()
     description = models.TextField()
     date_added = models.DateTimeField(default=datetime.now())
+    added_by = models.ForeignKey(User, null=True)
 
     @classmethod
     def get_all(cls):
