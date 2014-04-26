@@ -1,45 +1,43 @@
 (function(){
-var Anchors = document.getElementsByTagName('nav')[0].getElementsByTagName('a');
+  var Anchors = document.getElementsByTagName('nav')[0].getElementsByTagName('a');
 
-for (var I = 0; I < Anchors.length; I++)
-  Anchors[I].addEventListener('click', scroll, true);
+  for (var I = 0; I < Anchors.length; I++)
+    Anchors[I].addEventListener('click', scroll, true);
 
-function scroll(e)
-{
-  var url = (e.srcElement || e.target).href.
-  replace(new RegExp('/(?=[a-z]*$)'), '/raw/') + '/';
-
-  if (url)
+  function scroll(e)
   {
-    var newView = request(url);
-    console.log(newView);
-    if (newView === '')
+    var url = (e.srcElement || e.target).href,
+      raw = url.replace(/\/(?=[a-z]*$)/, '/raw/') + '/';
+
+    if (url)
+      request(raw, e);
+    else
       return;
-    else
-      e.preventDefault();
-      update(newView);
-  }
-  else
-    return;
   }
 
-function request(url)
-{
-var Request = new XMLHttpRequest();
-  Request.open('GET', url);
-  Request.send();
-
-  Request.onreadystatechange = function()
+  function request(url, e)
   {
-    if (Request.readyState === 4 && Request.status === 200)
-      return Request.responseText;
-    else
-      return '';
-  };
-}})();
+    var Request = new XMLHttpRequest();
+    Request.open('GET', url);
+    Request.send();
 
-function update(text)
-{
-  var Content = document.getElementsByTagName('main')[0];
-  Content.innerHTML = text;
-}
+    Request.onreadystatechange = function()
+    {
+      if (Request.readyState === 4 && Request.status === 200)
+      {
+        e.preventDefault();
+        update(Request.responseText, url);
+      }
+
+      else
+        return;
+    };
+  }
+
+  function update(text, url)
+  {
+      var Content = document.getElementsByTagName('main')[0];
+      history.pushState({}, url, url);
+      Content.innerHTML = text;
+  }
+})();
