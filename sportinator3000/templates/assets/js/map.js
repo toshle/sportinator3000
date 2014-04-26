@@ -6,23 +6,23 @@
       disableDefaultUI: true
     };
 
-function LoadMap() {
-  var Map = new google.maps.Map(Host, Options),
+  google.maps.event.addDomListener(window, 'load', LoadMap);
 
-    Marker = new google.maps.Marker({
-      position: new google.maps.LatLng(42.68730, 23.33422),
-      map: Map,
-      title: 'Hello World!'
-    }),
+  function LoadMap() {
+    var Map = new google.maps.Map(Host, Options),
 
-    Info = new google.maps.InfoWindow({
-      content: 'Test'
+      Marker = new google.maps.Marker({
+        position: new google.maps.LatLng(42.68730, 23.33422),
+        map: Map,
+        title: 'Hello World!'
+      }),
+
+      Info = new google.maps.InfoWindow({
+        content: 'Test'
+      });
+
+    google.maps.event.addListener(Marker, 'click', function() {
+      Info.open(Map, Marker);
     });
-
-  google.maps.event.addListener(Marker, 'click', function() {
-    Info.open(Map, Marker);
-  });
-}
-
-google.maps.event.addDomListener(window, 'load', LoadMap);
+  }
 })();
