@@ -37,15 +37,15 @@ class Place(models.Model):
         context = []
         for place in places:
             json_place = {
-                'name': place.place.name,
-                'latitude': place.place.latitude,
-                'longitude': place.place.longitude,
-                'description': place.place.description,
-                'address': place.place.address,
-                'city': place.place.city,
-                'photo_url': place.place.photo_url,
-                'video_url': place.place.video_url,
-                'date_added': place.place.date_added}
+                'name': place.name,
+                'latitude': place.latitude,
+                'longitude': place.longitude,
+                'description': place.description,
+                'address': place.address,
+                'city': place.city,
+                'photo_url': place.photo_url,
+                'video_url': place.video_url,
+                'date_added': 'place.date_added'}
             context.append(json_place)
         return json.dumps(context)
 
