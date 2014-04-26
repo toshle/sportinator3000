@@ -6,6 +6,7 @@ from django.http import HttpResponse
 import math
 from sports.models import Place, PlaceActivity, Activity, Sport
 import json
+from django.shortcuts import redirect
 
 
 def home(request):
@@ -172,6 +173,23 @@ def user_register(request):
     notifications.append("Регистрирахте се успешно.")
     return render(request, 'sports/home.html', {'messages': notifications})
 
+def user_edit(request):
+    notifications = []
+    if request.user.is_authenticated():
+        if request.user.check_password(request.POST['old_password']):
+          request.user.first_name = request.POST['first_name']
+          request.user.last_name = request.POST['last_name']
+          new_password = request.POST['new_password']
+          if new_password and new_password == request.POST['new_password_repeat']:
+              request.user.set_password(new_password)
+          request.user.save()
+          notifications.append("Успешно редактиране.")
+        else:
+          notifications.append("Грешна парола.")
+        return render(request, 'sports/profile.html', {'details': request.user, 'messages': notifications})
+    else:
+        notifications.append("Трябва да се логнете.")
+        return render(request, 'sports/home.html', {'messages': notifications})
 
 def sport_register_form(request):
     sport = Sport(request.POST['name'], request.POST['photo_url'])
@@ -206,7 +224,7 @@ def user_profile(request, user_id):
     notifications = []
     if request.user.is_authenticated():
         user = get_object_or_404(User, pk=user_id)
-        return render(request, 'sports/profile.html', {'user': user})
+        return render(request, 'sports/profile.html', {'details': user})
     else:
         notifications.append("Не сте логнат.")
         return render(request, 'sports/home.html', {'messages': notifications})
@@ -216,7 +234,7 @@ def user_profile_content(request, user_id):
     notifications = []
     if request.user.is_authenticated():
         user = get_object_or_404(User, pk=user_id)
-        return render(request, 'sports/profile_content.html', {'user': user})
+        return render(request, 'sports/profile_content.html', {'details': user})
     else:
         notifications.append("Не сте логнат.")
         return render(request, 'sports/home.html', {'messages': notifications})
