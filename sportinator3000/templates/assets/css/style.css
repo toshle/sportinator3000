@@ -37,11 +37,12 @@ main {
 
 main.new {
   transform: translate3d(0, 0, 0);
-  animation: floatLeft .4s ease-out both;
+  /* animation: floatLeft .4s ease-out both; */
+  /* z-index: 10; */
 }
 
 @keyframes floatLeft {
-    from { opacity: 0; transform: scale(.7); }
+    from {  }
 }
 
 footer {
