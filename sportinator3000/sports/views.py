@@ -3,7 +3,7 @@ from django.template import RequestContext, loader
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-import math
+from . import help_modules
 from sports.models import Place, PlaceActivity, Activity, Sport
 import json
 from django.shortcuts import redirect
@@ -33,26 +33,14 @@ def sports(request):
     longitude1 = float(request.GET['longitude'])
     radius = float(request.GET['radius'])
 
-    def distance_between_points(latitude1, longitude1, latitude2, longitude2):
-        degrees_to_radians = math.pi/180.0
-        phi1 = (90.0 - latitude1)*degrees_to_radians
-        phi2 = (90.0 - latitude2)*degrees_to_radians
-        theta1 = longitude1*degrees_to_radians
-        theta2 = longitude2*degrees_to_radians
-        cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) +
-               math.cos(phi1)*math.cos(phi2))
-        arc = math.acos(cos)
-
-        return arc*6373
-
-    close_places = [place for place in
-                    PlaceActivity.objects.filter(
-                        activity__sport__id=request.GET['sport'],
-                        activity__duration=request.GET['duration'],
-                        activity__price__lte=request.GET['price'])
-                    if distance_between_points(latitude1, longitude1,
-                                               place.place.latitude,
-                                               place.place.longitude)
+    close_places = [place for place in 
+                    help_modules.filter_all(PlaceActivity.get_all(),
+                                request.GET.get('sport'),
+                                request.GET.get('duration'),
+                                request.GET.get('price'))
+                    if help_modules.distance_between_points(latitude1, longitude1,
+                                                            place.place.latitude,
+                                                            place.place.longitude)
                     <= radius]
 
     return render(request, 'sports/sports.html',
