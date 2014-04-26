@@ -44,10 +44,14 @@ def user_logout(request):
 
 
 def user_register_form(request):
+    if request.user.is_authenticated():
+      return render(request, 'sports/home.html', {})
     return render(request, 'sports/register.html', {})
 
 
 def user_register(request):
+    if request.user.is_authenticated():
+      return render(request, 'sports/home.html', {})
     user = User.objects.create_user(request.POST['username'],
                                     request.POST['email'],
                                     request.POST['password'])
@@ -89,5 +93,3 @@ def nearby(request):
             'video_url': place.video_url,
             'date_added': place.date_added}
         context.append(json_place)
-
-    return render(request, 'sports/nearby.html', json.dumps(context))
