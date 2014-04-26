@@ -108,3 +108,23 @@ nav > a:hover {
   margin-left: 5px;
   vertical-align: middle;
 }
+
+#options {
+  color: white;
+  border: 1px rgba(0, 0, 0, 0.5) solid;
+  border-top: none;
+  background-color: rgba(70, 70, 70, 0.7);
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 5px;
+}
+
+#options select {
+  border: none;
+  height: 15px;
+}
+
+#options input[type="range"] {
+  height: 15px;
+  background: none;
+}
