@@ -6,17 +6,22 @@ import math
 from sports.models import Place
 import json
 
+
 def home(request):
     return render(request, 'sports/home.html', {})
+
 
 def home_content(request):
     return render(request, 'sports/home_content.html', {})
 
+
 def sports(request):
     return render(request, 'sports/sports.html', {})
 
+
 def sports_content(request):
     return render(request, 'sports/sports_content.html', {})
+
 
 def user_login(request):
     username = request.POST['username']
@@ -32,16 +37,20 @@ def user_login(request):
     else:
         return render(request, 'sports/register.html', {})
 
+
 def user_logout(request):
     logout(request)
     return render(request, 'sports/home.html', {})
 
+
 def user_register_form(request):
   return render(request, 'sports/register.html', {})
+
 
 def user_register(request):
   user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
   return render(request, 'sports/home.html', {})
+
 
 def nearby(request):
     latitude1 = request.POST['latitude']
