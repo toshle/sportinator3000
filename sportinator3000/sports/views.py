@@ -212,3 +212,9 @@ def user_forgotten(request):
     user.save()
     notifications.append("Изпратена ви е нова парола на " + request.POST['email'])
     return render(request, 'sports/home.html', {'messages': notifications})
+
+def place_details(request, place_id):
+    notifications = []
+    place = Place.objects.get(pk=place_id)
+    activities = PlaceActivity.objects.filter(place_id=place_id)
+    return render(request, 'sports/details.html', {'place': place, 'activities': activities})
