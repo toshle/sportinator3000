@@ -224,11 +224,12 @@ img {
   text-indent: 0px;
 }
 
-#notifications {position:absolute;
-    left:0;
-    right:0;
-    margin-left:auto;
-    margin-right:auto;
+#notifications {
+  position:absolute;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
   z-index: 1001;
   color: white;
   width: 400px;
