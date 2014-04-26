@@ -174,6 +174,7 @@ input {
 }
 
 #about_us {
+  text-shadow: 1px 1px #c3c3c3;
   position: absolute;
   overflow: auto;
   top: 100px;
@@ -213,10 +214,15 @@ img {
 }
 
 #notifications {
+  color: white;
   margin: auto;
   width: 400px;
   text-align: center;
   border: 1px solid black;
+  border-top: none;
+  background-color: rgba(70, 70, 70, 0.8);
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
 }
 
 @-moz-document url-prefix() {

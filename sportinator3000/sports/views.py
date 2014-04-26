@@ -53,18 +53,23 @@ def user_logout(request):
 
 
 def user_register_form(request):
+    notifications = []
     if request.user.is_authenticated():
-        return render(request, 'sports/home.html', {})
+        notifications.append("Вече сте логнат.")
+        return render(request, 'sports/home.html', {'messages': notifications})
     return render(request, 'sports/register.html', {})
 
 
 def user_register(request):
+    notifications = []
     if request.user.is_authenticated():
-        return render(request, 'sports/home.html', {})
+        notifications.append("Вече сте логнат.")
+        return render(request, 'sports/home.html', {'messages': notifications})
     user = User.objects.create_user(request.POST['username'],
                                     request.POST['email'],
                                     request.POST['password'])
-    return render(request, 'sports/home.html', {})
+    notifications.append("Регистрирахте се успешно.")
+    return render(request, 'sports/home.html', {'messages': notifications})
 
 
 def sport_register_form(request):
@@ -131,3 +136,11 @@ def nearby(request):
             'video_url': place.video_url,
             'date_added': place.date_added}
         context.append(json_place)
+
+def user_profile(request, user_id):
+    user = User.objects.get(pk=user_id)
+    return render(request, 'sports/profile.html', {'user': user})
+
+def user_profile_content(request, user_id):
+    user = User.objects.get(pk=user_id)
+    return render(request, 'sports/profile_content.html', {'user': user})

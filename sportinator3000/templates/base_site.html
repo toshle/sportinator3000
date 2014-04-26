@@ -13,7 +13,7 @@
     <a href="/home">Начало</a>
     <a href="/sports">Търсене</a>
     {% if user.is_active %}
-    <a href="/profile">Профил</a>
+    <a href="/profile/{{ user.id }}">Профил</a>
     {% endif %}
     <a href="/about">За нас</a>
     </nav>
@@ -31,9 +31,9 @@
     <a href="" id="register_link">Регистрация</a> / <a href="#">Забравена парола</a>
     </div>
     {% else %}
-      Здравей, {% firstof user.get_short_name user.get_username %}.
-      <br />
-      <a href="/logout">Изход</a>
+    <div id="logged_in">
+      Здравей, {% firstof user.get_short_name user.get_username %} | <a href="/logout">Изход</a>
+    </div>
     {% endif %}
   </header>
   <main>
