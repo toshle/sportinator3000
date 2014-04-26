@@ -152,6 +152,7 @@ def user_profile(request, user_id):
         notifications.append("Не сте логнат.")
         return render(request, 'sports/home.html', {'messages': notifications})
 
+
 def user_profile_content(request, user_id):
     notifications = []
     if request.user.is_authenticated():
@@ -160,4 +161,3 @@ def user_profile_content(request, user_id):
     else:
         notifications.append("Не сте логнат.")
         return render(request, 'sports/home.html', {'messages': notifications})
-
