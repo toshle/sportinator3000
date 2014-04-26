@@ -78,7 +78,7 @@ class Activity(models.Model):
         return cls.objects.all()
 
     def __str__(self):
-        return '{} {}'.format(self.name, self.price)
+        return '{} price {}'.format(self.name, self.price)
 
 
 class PlaceActivity(models.Model):
@@ -86,7 +86,7 @@ class PlaceActivity(models.Model):
     activity = models.ForeignKey(Activity)
 
     def __str__(self):
-        return '{} price {}'.format(self.place, self.activity)
+        return '{} {}'.format(self.place, self.activity)
 
     @classmethod
     def get_all(cls):
