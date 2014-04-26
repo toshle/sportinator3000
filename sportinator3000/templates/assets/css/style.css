@@ -163,3 +163,31 @@ input {
 #logged_in {
   padding-bottom: 10px;
 }
+
+p {
+  text-align: justify;
+  text-indent: 30px;
+}
+
+img {
+  border: 4px rgba(0, 0, 0, 0.5) solid;
+  width: 180px;
+  height: 220px;
+  float: left;
+}
+
+#info {
+  width: 80%;
+  margin: 4px;
+  text-indent: 0px;
+  margin-left: 20px;
+  float: left;
+}
+
+#student {
+  float: right;
+}
+
+#name {
+  text-indent: 0px;
+}
