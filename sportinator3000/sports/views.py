@@ -59,8 +59,7 @@ def sports(request):
                    'sports': Sport.objects.all()})
 
 def sports_content(request):
-    return render(request, 'sports/sports_content.html', {'sports': Sport.objects.all()})
-        latitude1 = request.POST['latitude']
+    latitude1 = request.POST['latitude']
     longitude1 = request.POST['longitude']
     radius = request.POST['radius']
 
