@@ -7,9 +7,9 @@
   function onclick(e) {
     e.preventDefault();
 
-    var url = (e.srcElement || e.target).href,
-      raw = url.replace(/\/(?=[a-z]*$)/, '/raw/') + '/';
-
+    var abs = (e.srcElement || e.target).href,
+      url = abs.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+      raw = 'raw/' + url;
     if (url) {
       var Request = new XMLHttpRequest();
       Request.open('GET', raw);
@@ -28,7 +28,7 @@
     New.innerHTML = text;
     document.getElementsByTagName('body')[0].appendChild(New);
 
-    Old.className = 'old';
+    Old.className = 'complete)old';
     Old.parentNode.removeChild(Old);
     history.pushState({}, url, url);
   }
