@@ -10,6 +10,7 @@
 
 
 
+
         <select name="period">
         <option value="" style="display: none;" selected disabled>Продължителност</option>
         <option value="1">1 час</option>
@@ -23,3 +24,9 @@
         Цена: 0<input type="range" name="price" min="1" max="100">200
 
     </form>
+
+    {% if places %}
+            {% for sport in places %}
+                {{sport.place.name}}
+            {% endfor %}
+    {% endif %}
