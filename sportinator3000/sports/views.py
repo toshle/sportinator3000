@@ -19,11 +19,11 @@ def home_content(request):
 
 
 def sports(request):
-    return render(request, 'sports/sports.html', {})
+    return render(request, 'sports/sports.html', {'sports': Sport.objects.all()})
 
 
 def sports_content(request):
-    return render(request, 'sports/sports_content.html', {})
+    return render(request, 'sports/sports_content.html', {'sports': Sport.objects.all()})
 
 
 def about(request):
@@ -98,7 +98,7 @@ def place_activity_register_form(request):
 
 def nearby(request):
     latitude1 = request.POST['latitude']
-    longitude1 = request.POST['latitude']
+    longitude1 = request.POST['longitude']
     radius = request.POST['radius']
 
     def distance_between_points(latitude1, longitude1, latitude2, longitude2):
