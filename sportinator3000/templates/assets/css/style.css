@@ -11,6 +11,7 @@ body, article {
   font-family: Verdana;
   background-color: #F1EEE8;
   z-index: -1;
+  transform-style: preserve-3d;
 }
 
 a {
@@ -34,9 +35,13 @@ main {
   padding: 0 50px 0 50px;
 }
 
-main.old {
-  position: absolute;
-  left: 100px;
+main.new {
+  transform: translate3d(0, 0, 0);
+  animation: floatLeft .4s ease-out both;
+}
+
+@keyframes floatLeft {
+    from { opacity: 0; transform: scale(.7); }
 }
 
 footer {
