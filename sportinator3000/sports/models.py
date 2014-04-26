@@ -35,7 +35,7 @@ class Place(models.Model):
     @classmethod
     def to_jason(cls, places):
         context = []
-        for place in close_places:
+        for place in places:
             json_place = {
                 'name': place.place.name,
                 'latitude': place.place.latitude,
