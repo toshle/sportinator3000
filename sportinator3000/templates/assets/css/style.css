@@ -110,6 +110,8 @@ nav > a:hover {
 }
 
 #options {
+  width: 90%;
+  margin: auto;
   color: white;
   border: 1px rgba(0, 0, 0, 0.5) solid;
   border-top: none;
@@ -130,8 +132,4 @@ nav > a:hover {
 #options input[type="range"] {
   height: 15px;
   background: none;  margin: 0 20px 0 20px;
-}
-
-#search_tools {
-  padding: 0 15% 0 15%;
 }
