@@ -3,7 +3,7 @@ from django.template import RequestContext, loader
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 import math
-from sports.models import Place
+from sports.models import Place, PlaceActivity
 import json
 
 
@@ -64,7 +64,21 @@ def place_register_form(request):
                   request.POST['video_url'], request.POST['latitude'],
                   request.POST['longitude'], request.POST['description'],
                   request.POST['date_added'])
-    return render(request, 'sports/detail.html', {})
+    place.save()
+    return render(request, 'sports/place_detail.html', {})
+
+
+def place_activity_register_form(request):
+    place_activity = PlaceActivity(request.POST['place'],
+                                   Activity(request.POST['sport'],
+                                            request.POST['activity_name'],
+                                            request.POST['has_trainer'],
+                                            request.POST['price'],
+                                            request.POST['duration'],
+                                            request.POST['worktime']))
+    # place and sport are db entries
+    place_activity.save()
+    return render(request, 'sports/place_activity_detail.html', {})
 
 
 def nearby(request):
