@@ -9,14 +9,16 @@
 
     var abs = (e.srcElement || e.target).href,
       url = abs.replace(/^(?:\/\/|[^\/]+)*\//, ""),
-      raw = 'raw/' + url;
+      raw = 'raw/' + url + '/';
+      base = abs.substr(0, abs.indexOf(url));
+
     if (url) {
       var Request = new XMLHttpRequest();
-      Request.open('GET', raw);
+      Request.open('GET', base + raw);
       Request.send();
 
       Request.onreadystatechange = function() {
-        update(Request.responseText, url);
+        update(Request.responseText, abs);
       };
     }
   }
@@ -28,8 +30,8 @@
     New.innerHTML = text;
     document.getElementsByTagName('body')[0].appendChild(New);
 
-    Old.className = 'complete)old';
+    New.className = 'new';
     Old.parentNode.removeChild(Old);
-    history.pushState({}, url, url);
+    history.replaceState({}, '', url);
   }
 })();
