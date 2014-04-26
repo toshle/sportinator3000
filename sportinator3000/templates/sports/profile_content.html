@@ -1,3 +1,9 @@
 {% if user %}
-  {{ user.username }}
+<div id="profile">
+  Username: {{ user.username }}<br />
+  Joined: {{ user.date_joined }}<br />
+  Last Login: {{ user.last_login }}<br />
+  Email: {{ user.email }}<br />
+  Superuser: {{ user.is_superuser }}<br />
+</div>
 {% endif %}

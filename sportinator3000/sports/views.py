@@ -137,10 +137,14 @@ def nearby(request):
             'date_added': place.date_added}
         context.append(json_place)
 
-def user_profile(request, user_id):
-    user = User.objects.get(pk=user_id)
-    return render(request, 'sports/profile.html', {'user': user})
 
-def user_profile_content(request, user_id):
-    user = User.objects.get(pk=user_id)
-    return render(request, 'sports/profile_content.html', {'user': user})
+def user_profile(request, user_id):
+    notifications = []
+    if request.user.is_authenticated():
+        user = User.objects.get(pk=user_id)
+        return render(request, 'sports/profile.html', {'user': user})
+    else:
+        notifications.append("Не сте логнат.")
+        return render(request, 'sports/home.html', {'messages': notifications})
+
+user_profile_content = user_profile
