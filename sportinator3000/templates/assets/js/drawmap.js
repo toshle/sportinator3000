@@ -20,6 +20,6 @@ Map = {};
   function LoadMap() {
     Map.Map = new google.maps.Map(Map.Host, Map.Options);
     if (Map.PlaceMarkers !== undefined)
-      Map.PlaceMarkers();
+      Map.PlaceAllMarkers();
   }
 })();

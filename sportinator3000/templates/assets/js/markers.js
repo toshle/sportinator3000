@@ -1,28 +1,42 @@
-Map.PlaceMarkers = function() {
+Map.PlaceMarkers = function(url) {
   var Base = window.location.href.match(/^(?:\/\/|[^\/]+)*\//),
     Request = new XMLHttpRequest();
 
-  Request.open('GET', Base + 'api/all');
+  Request.open('GET', Base + url);
   Request.send();
 
   Request.onreadystatechange = function() {
     if (Request.readyState == 4) {
-      Map.MarkerObjects = JSON.parse(Request.responseText);
-      placeMarkers();
+      placeMarkers(JSON.parse(Request.responseText));
     }
   };
 
-  function placeMarkers() {
-    Map.Markers = new Array(Map.MarkerObjects.length);
-    for (var I = 0; I < Map.MarkerObjects.length; I++)
-    {
-      Mark = Map.MarkerObjects[I];
+  function placeMarkers(Objects) {
+    for (var Index in Objects) {
+      var MarkerObj = Objects[Index];
 
-      Map.Markers[I] = new google.maps.Marker({
-        position: new google.maps.LatLng(Mark.latitude, Mark.longitude),
+      Marker = new google.maps.Marker({
+        position: new google.maps.LatLng(
+              MarkerObj.latitude,
+              MarkerObj.longitude
+        ),
         map: Map.Map,
-        title: Mark.name
+        title: MarkerObj.name
       });
+
+      Marker.Info = new google.maps.InfoWindow({
+        content: MarkerObj.description
+      });
+
+      google.maps.event.addListener(Marker, 'click', Map.OpenInfo);
     }
   }
+};
+
+Map.PlaceAllMarkers = function() {
+  Map.PlaceMarkers('api/all');
+};
+
+Map.OpenInfo = function() {
+  this.Info.open(Map.Map, this);
 };
