@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^register', views.user_register, name='register'),
     url(r'^forgotten', views.user_forgotten, name='forgotten'),
     url(r'^about', views.about, name='about'),
+    url(r'^api/all', views.all_places, name='all_places'),
     url(r'^raw/about', views.about_content, name='about_content'),
     url(r'^profile/(?P<user_id>[0-9]+)/$', views.user_profile, name='profile'),
     url(r'^details/(?P<place_id>[0-9]+)/$', views.place_details, name='place_details'),

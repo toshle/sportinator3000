@@ -15,6 +15,24 @@ def home_content(request):
     return render(request, 'sports/home_content.html', {})
 
 
+def all_places(request):
+    places = Place.get_all()
+    context = []
+    for place in places:
+        json_place = {
+            'name': place.name,
+            'latitude': place.latitude,
+            'longitude': place.longitude,
+            'description': place.description,
+            'address': place.address,
+            'city': place.city,
+            'photo_url': place.photo_url,
+            'video_url': place.video_url,
+            'date_added': place.date_added}
+        context.append(json_place)
+    return HttpResponse(content=context)
+
+
 def sports(request):
     latitude1 = float(request.GET['latitude'])
     longitude1 = float(request.GET['longitude'])
