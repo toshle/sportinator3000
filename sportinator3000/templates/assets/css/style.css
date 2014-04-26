@@ -123,6 +123,14 @@ input {
   vertical-align: middle;
 }
 
+.slider {
+  border: none;
+  background: none;
+  color: white;
+  font-size: 14px;
+  width: 45px;
+}
+
 #options {
   width: 90%;
   margin: auto;
@@ -145,7 +153,8 @@ input {
 
 #options input[type="range"] {
   height: 15px;
-  background: none;  margin: 0 20px 0 20px;
+  background: none;  
+  margin-left: 20px;
 }
 
 #register_popup {
