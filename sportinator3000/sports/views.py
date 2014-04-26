@@ -56,7 +56,7 @@ def sports(request):
                         activity__sport__id=request.GET['sport'],
                         activity__duration=request.GET['duration'],
                         activity__price__lte=request.GET['price'])
-                    if distance_between_points(latitude1, longitude1
+                    if distance_between_points(latitude1, longitude1,
                                                place.place.latitude,
                                                place.place.longitude)
                     <= radius]
