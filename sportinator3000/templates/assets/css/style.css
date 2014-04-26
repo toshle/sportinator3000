@@ -190,7 +190,7 @@ img {
   float: left;
 }
 
-#info {
+.info {
   width: 80%;
   margin: 4px;
   text-indent: 0px;
@@ -198,12 +198,12 @@ img {
   float: left;
 }
 
-#student {
+.student {
   float: right;
   margin-bottom: 30px;
 }
 
-#name {
+.name {
   text-indent: 0px;
 }
 
@@ -212,10 +212,6 @@ img {
   width: 400px;
   text-align: center;
   border: 1px solid black;
-}
-
-select {
-  
 }
 
 @-moz-document url-prefix() {
