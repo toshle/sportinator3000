@@ -47,7 +47,8 @@ def sports(request):
                     <= radius]
 
     return render(request, 'sports/sports.html',
-                  {'json_places': Place.to_json(close_places), 'places': close_places,
+                  {'json_places': Place.to_json(close_places),
+                   'places': close_places,
                    'sports': Sport.objects.all()})
 
 
@@ -79,7 +80,8 @@ def sports_content(request):
                     <= radius]
 
     return render(request, 'sports/sports_content.html',
-                  {'json_places': Place.to_json(close_places), 'places': close_places,
+                  {'json_places': Place.to_json(close_places),
+                   'places': close_places,
                    'sports': Sport.objects.all()})
 
 
