@@ -6,34 +6,6 @@
   <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <header>
-      <nav>
-        <a href="/home">Начало</a>
-        <a href="/sports">Търси</a>
-        <a href="#">Събития</a>
-        <a href="#">Профил</a>
-        <a href="#">За нас</a>
-      </nav>
-      <div id="logo">
-        <h1><a href="/home">Спортинатор</a></h1>
-      </div>
-      <div id="login">
-        {% if not user.is_active %}
-        <form method="post">
-          <input type="submit" name="submit" value="" />
-          <input type="text" placeholder="Username" name="username"/>
-          <br />
-          <input type="password" placeholder="Password" name="password"/>
-        </form>
-        <a href="#">Регистрация</a> / <a href="#">Забравена парола</a>
-        {% else %}
-          Здравей, {% firstof user.get_short_name user.get_username %}. 
-          <br />
-          <a href="#">Изход</a>
-        {% endif %}
-      </div>
-    </header>
-    <main>
   <header>
     <nav>
     <a href="/home">Начало</a>
