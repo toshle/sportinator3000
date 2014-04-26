@@ -60,8 +60,7 @@ def sports(request):
                     <= radius]
 
     return render(request, 'sports/sports.html',
-                  {'json_places': Place.to_json(map(lambda x: x.place, close_places)),
-                   'places': close_places,
+                  {'places': close_places,
                    'sports': Sport.objects.all()})
 
 
