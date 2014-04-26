@@ -57,7 +57,6 @@ def nearby(request):
                                                     place.latitude,
                                                     place.longitude) <= radius]
 
-<<<<<<< HEAD
     context = []
     for place in close_places:
         json_place = {
@@ -73,32 +72,3 @@ def nearby(request):
         context.append(json_place)
 
     return render(request, 'sports/nearby.html', simplejson.dumps(context))
-=======
-        # Convert latitude and longitude to 
-        # spherical coordinates in radians.
-        degrees_to_radians = math.pi/180.0
-
-        # phi = 90 - latitude
-        phi1 = (90.0 - latitude1)*degrees_to_radians
-        phi2 = (90.0 - latitude2)*degrees_to_radians
-
-        # theta = longitude
-        theta1 = longitude1*degrees_to_radians
-        theta2 = longitude2*degrees_to_radians
-
-        # Compute spherical distance from spherical coordinates.
-
-        # For two locations in spherical coordinates 
-        # (1, theta, phi) and (1, theta, phi)
-        # cosine( arc length ) = 
-        #    sin phi sin phi' cos(theta-theta') + cos phi cos phi'
-        # distance = rho * arc 
-
-        cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) + 
-               math.cos(phi1)*math.cos(phi2))
-        arc = math.acos( cos )
-
-        # Remember to multiply arc by the radius of the earth 
-        # in your favorite set of units to get length.
-        return arc*6373
->>>>>>> 635562a373b13df05c28ab5f2ffb62b7cd6d5ddc
