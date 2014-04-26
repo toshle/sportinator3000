@@ -1,5 +1,5 @@
 <form id="options" method="post">
-        <select name="sports">
+        <select name="sport">
         {% if sports %}
             {% for sport in sports %}
                 <option value="{{sport.id}}">{{sport.name}}</option>
@@ -8,13 +8,15 @@
         {% endif %}
         </select>
 
+
+
         <select name="period">
         <option value="" style="display: none;" selected disabled>Продължителност</option>
-        <option value="hour">1 час</option>
-        <option value="two_hours">2 часа</option>
-        <option value="week">седмица</option>
-        <option value="month">месец</option>
-        <option value="year">година</option>
+        <option value="1">1 час</option>
+        <option value="2">2 часа</option>
+        <option value="168">седмица</option>
+        <option value="240">месец</option>
+        <option value="2880">година</option>
         </select>
 
         Обхват: 0<input type="range" name="points" min="1" max="100">100

@@ -16,9 +16,9 @@ def home_content(request):
 
 
 def sports(request):
-    latitude1 = request.POST['latitude']
-    longitude1 = request.POST['longitude']
-    radius = request.POST['radius']
+    latitude1 = float(request.GET['latitude'])
+    longitude1 = float(request.GET['longitude'])
+    radius = float(request.GET['radius'])
 
     def distance_between_points(latitude1, longitude1, latitude2, longitude2):
         degrees_to_radians = math.pi/180.0
@@ -33,35 +33,35 @@ def sports(request):
         return arc*6373
 
     close_places = [place for place in
-                    Place.objects.filter(
-                        activity__sport__name=request.POST['sport'],
-                        activity__duration=request.POST['duration'],
-                        activity__price__lte=request.POST['price'])
-                    if self.distance_between_points(latitude1, longitude1,
-                                                   place.latitude,
-                                                   place.longitude) <= radius]
+                    PlaceActivity.objects.filter(
+                        activity__sport__id=request.GET['sport'],
+                        activity__duration=request.GET['duration'],
+                        activity__price__lte=request.GET['price'])
+                    if distance_between_points(latitude1, longitude1,
+                                                   place.place.latitude*0.000001,
+                                                   place.place.longitude*0.000001) <= radius]
 
     context = []
     for place in close_places:
         json_place = {
-            'name': place.name,
-            'latitude': place.latitude,
-            'longitude': place.longitude,
-            'description': place.description,
-            'address': place.address,
-            'city': place.city,
-            'photo_url': place.photo_url,
-            'video_url': place.video_url,
-            'date_added': place.date_added}
+            'name': place.place.name,
+            'latitude': place.place.latitude,
+            'longitude': place.place.longitude,
+            'description': place.place.description,
+            'address': place.place.address,
+            'city': place.place.city,
+            'photo_url': place.place.photo_url,
+            'video_url': place.place.video_url,
+            'date_added': place.place.date_added}
         context.append(json_place)
     return render(request, 'sports/sports.html',
-                  {'json_places': context, 'places': close_plases,
+                  {'json_places': context, 'places': close_places,
                    'sports': Sport.objects.all()})
 
 def sports_content(request):
-    latitude1 = request.POST['latitude']
-    longitude1 = request.POST['longitude']
-    radius = request.POST['radius']
+    latitude1 = float(request.GET['latitude'])
+    longitude1 = float(request.GET['longitude'])
+    radius = float(request.GET['radius'])
 
     def distance_between_points(latitude1, longitude1, latitude2, longitude2):
         degrees_to_radians = math.pi/180.0
@@ -76,29 +76,29 @@ def sports_content(request):
         return arc*6373
 
     close_places = [place for place in
-                    Place.objects.filter(
-                        activity__sport__name=request.POST['sport'],
-                        activity__duration=request.POST['duration'],
-                        activity__price__lte=request.POST['price'])
-                    if self.distance_between_points(latitude1, longitude1,
-                                                   place.latitude,
-                                                   place.longitude) <= radius]
+                    PlaceActivity.objects.filter(
+                        activity__sport__id=request.GET['sport'],
+                        activity__duration=request.GET['duration'],
+                        activity__price__lte=request.GET['price'])
+                    if distance_between_points(latitude1, longitude1,
+                                                   place.place.latitude*0.000001,
+                                                   place.place.longitude*0.000001) <= radius]
 
     context = []
     for place in close_places:
         json_place = {
-            'name': place.name,
-            'latitude': place.latitude,
-            'longitude': place.longitude,
-            'description': place.description,
-            'address': place.address,
-            'city': place.city,
-            'photo_url': place.photo_url,
-            'video_url': place.video_url,
-            'date_added': place.date_added}
+            'name': place.place.name,
+            'latitude': place.place.latitude,
+            'longitude': place.place.longitude,
+            'description': place.place.description,
+            'address': place.place.address,
+            'city': place.place.city,
+            'photo_url': place.place.photo_url,
+            'video_url': place.place.video_url,
+            'date_added': place.place.date_added}
         context.append(json_place)
-    return render(request, 'sports/sports.html',
-                  {'json_places': context, 'places': close_plases,
+    return render(request, 'sports/sports_content.html',
+                  {'json_places': context, 'places': close_places,
                    'sports': Sport.objects.all()})
 
 
