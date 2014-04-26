@@ -147,4 +147,12 @@ def user_profile(request, user_id):
         notifications.append("Не сте логнат.")
         return render(request, 'sports/home.html', {'messages': notifications})
 
-user_profile_content = user_profile
+def user_profile_content(request, user_id):
+    notifications = []
+    if request.user.is_authenticated():
+        user = get_object_or_404(User, pk=user_id)
+        return render(request, 'sports/profile_content.html', {'user': user})
+    else:
+        notifications.append("Не сте логнат.")
+        return render(request, 'sports/home.html', {'messages': notifications})
+
