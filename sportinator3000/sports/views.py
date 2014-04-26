@@ -138,9 +138,12 @@ def nearby(request):
         context.append(json_place)
 
 def user_profile(request, user_id):
-    user = User.objects.get(pk=user_id)
-    return render(request, 'sports/profile.html', {'user': user})
+    notifications = []
+    if request.user.is_authenticated():
+        user = User.objects.get(pk=user_id)
+        return render(request, 'sports/profile.html', {'user': user})
+    else:
+        notifications.append("Не сте логнат.")
+        return render(request, 'sports/home.html', {'messages': notifications})
 
-def user_profile_content(request, user_id):
-    user = User.objects.get(pk=user_id)
-    return render(request, 'sports/profile_content.html', {'user': user})
+user_profile_content = user_profile
