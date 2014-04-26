@@ -3,7 +3,7 @@ from django.template import RequestContext, loader
 from django.contrib.auth import authenticate, login, logout
 import math
 from sports.models import Place
-from simplejson import *
+import json
 
 def home(request):
     return render(request, 'sports/home.html', {})
@@ -60,15 +60,15 @@ def nearby(request):
     context = []
     for place in close_places:
         json_place = {
-            'name' : place.name
-            'latitude' : place.latitude
-            'longitude' : place.longitude
-            'description' : place.description
-            'address' : place.address
-            'city' : place.city
-            'photo_url' : place.photo_url
-            'video_url' : place.video_url
-            'date_added' : place.date_added}
+            'name' : place.name,
+            'latitude' : place.latitude,
+            'longitude' : place.longitude,
+            'description' : place.description,
+            'address' : place.address,
+            'city' : place.city,
+            'photo_url' : place.photo_url,
+            'video_url' : place.video_url,
+            'date_added' : place.date_added,}
         context.append(json_place)
 
-    return render(request, 'sports/nearby.html', simplejson.dumps(context))
+    return render(request, 'sports/nearby.html', json.dumps(context))
