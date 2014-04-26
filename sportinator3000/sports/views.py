@@ -34,16 +34,17 @@ def about_content(request):
 def user_login(request):
     username = request.POST['username']
     password = request.POST['password']
+    notifications = []
     user = authenticate(username=username, password=password)
     if user is not None:
         if user.is_active:
             login(request, user)
             return render(request, 'sports/home.html', {})
         else:
-            return render(request, 'sports/register.html',
-                          {'disabled_account': 'Disabled account'})
+            notifications.append(username + " акаунтът е неактивен.")
     else:
-        return render(request, 'sports/register.html', {})
+        notifications.append("Невалидно име или парола.")
+        return render(request, 'sports/home.html', {'messages': notifications})
 
 
 def user_logout(request):

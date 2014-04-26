@@ -35,6 +35,13 @@
     {% endif %}
   </header>
   <main>
+    {% if messages %}
+      <div id="notifications">
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+      </div>
+    {% endif %}
     {% block main %}{% endblock %}
   </main>
 

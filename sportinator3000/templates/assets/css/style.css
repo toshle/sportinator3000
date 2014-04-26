@@ -192,3 +192,10 @@ img {
 #name {
   text-indent: 0px;
 }
+
+#notifications {
+  margin: auto;
+  width: 400px;
+  text-align: center;
+  border: 1px solid black;
+}
