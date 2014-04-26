@@ -19,11 +19,10 @@
       <td class="value">{{ place.description }}</td>
     </tr>
   </table>
-    {% if place.photo_url %}
-    <img id="photo" src="{{ place.photo_url }}" alt="Image" />
-    {% endif %}
   {% endif %}
-
+    {% if place.photo_url %}
+      <img src="{{ place.photo_url }}" alt="Image" />
+    {% endif %}
   {% if activities %}
   <table>
     
