@@ -19,7 +19,7 @@
     </div>
     <div id="login">
     {% if not user.is_active %}
-    <form method="post" action="">
+    <form method="post" action="/login">{% csrf_token %}
       <input type="submit" name="submit" value="" />
       <input type="text" placeholder="Username" name="username"/>
       <br />
@@ -29,7 +29,7 @@
     {% else %}
       Здравей, {% firstof user.get_short_name user.get_username %}. 
       <br />
-      <a href="#">Изход</a>
+      <a href="/logout">Изход</a>
     {% endif %}
     </div>
   </header>
