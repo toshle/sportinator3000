@@ -33,7 +33,7 @@ class Place(models.Model):
         return cls.objects.all()
 
     @classmethod
-    def to_jason(cls, places):
+    def to_json(cls, places):
         context = []
         for place in places:
             json_place = {
