@@ -8,21 +8,15 @@
 <body>
   <article></article>
 
-  <script src="/assets/js/geolocation.js"></script>
-  <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
-  <script src="/assets/js/drawmap.js"></script>
-
   <header>
+    <img id="logo_image" src="/assets/img/sports_logo.png" />
     <nav>
     <a href="/home">Начало</a>
     <a href="/sports">Търсене</a>
-    {% if user.is_active %}
-      <a href="/profile/{{ user.id }}">Профил</a>
-    {% endif %}
     <a href="/about">За нас</a>
     </nav>
     <div id="logo">
-    <h1><a href="/home">Спортинатор</a></h1>
+    <h3><i><a href="/home">С п о р т и н а т о р</a></i></h3>
     </div>
     <div id="login">
     {% if not user.is_active %}
@@ -36,7 +30,7 @@
     </div>
     {% else %}
     <div id="logged_in">
-      Здравей, {% firstof user.get_short_name user.get_username %} | <a href="/logout">Изход</a>
+      Здравей, <a href="/profile/{{ user.id }}">{% firstof user.get_short_name user.get_username %}</a> | <a href="/logout">Изход</a>
     </div>
     {% endif %}
   </header>
@@ -52,7 +46,7 @@
   </main>
 
   <footer>
-    <a href="#">#ПодайМонстъраТам</a>
+    <a href="/about">#ПодайМонстъраТам</a>
   </footer>
 
   {% if not user.is_active %}
@@ -87,6 +81,8 @@
   </div>
   {% endif %}
 
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+  <script src="/assets/js/map.js"></script>
   <script src="/assets/js/slide.js"></script>
   <script src="/assets/js/popups.js"></script>
 </body>

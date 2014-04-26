@@ -1,26 +1,39 @@
-{% if user %}
+{% if details %}
 <div id="content">
   <table>
     <tr>
       <td class="field">Потребител</td>
-      <td class="value">{{ user.username }}</td>
+      <td class="value">{{ details.username }}</td>
     </tr>
     <tr>
-      <td class="field">E-mail</td>
-      <td class="value">{{ user.email }}</td>
+      <td class="field">Име</td>
+      <td class="value">{{ details.first_name|default:"-" }}</td>
+    </tr>
+    <tr>
+      <td class="field">Фамилия</td>
+      <td class="value">{{ details.last_name|default:"-" }}</td>
     </tr>
     <tr>
       <td class="field">Регистриран на</td>
-      <td class="value">{{ user.date_joined }}</td>
+      <td class="value">{{ details.date_joined }}</td>
     </tr>
     <tr>
       <td class="field">Последно онлайн</td>
-      <td class="value">{{ user.last_login }}</td>
-    </tr>
-    <tr>
-      <td class="field">Superuser</td>
-      <td class="value">{{ user.is_superuser }}</td>
+      <td class="value">{{ details.last_login }}</td>
     </tr>
   </table>
+  {% if user.id == details.id %}
+    Редактиране
+    <form method="post" action="/edit">
+      {% csrf_token %}
+      <input type="text" name="first_name" value="{{ details.first_name }}" placeholder="Име" /><br />
+      <input type="text" name="last_name" value="{{ details.last_name }}" placeholder="Фамилия" /><br />
+      <input type="password" name="old_password" placeholder="Стара парола" required /><br />
+      <input type="password" name="new_password" placeholder="Нова парола" /><br />
+      <input type="password" name="new_password_repeat" placeholder="Нова парола" /><br />
+      <input type="submit" name="submit" value="Редактирай" />
+    </form>
+  {% endif %}
 </div>
+
 {% endif %}

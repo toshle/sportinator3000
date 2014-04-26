@@ -1,18 +1,50 @@
 <div id="content">
-  {% if place %}
-    {{ place.name }}<br />
-    {{ place.city }}<br />
-    {{ place.address }}<br />
-    {{ place.description }}<br />
-  {% endif %}
-  <br />
 
+  {% if place %}
+  <table>
+    <tr>
+      <td class="field">Място</td>
+      <td class="value">{{ place.name }}</td>
+    </tr>
+    <tr>
+      <td class="field">Град</td>
+      <td class="value">{{ place.city }}</td>
+    </tr>
+    <tr>
+      <td class="field">Адрес</td>
+      <td class="value">{{ place.address }}</td>
+    </tr>
+    <tr>
+      <td class="field">Описание</td>
+      <td class="value">{{ place.description }}</td>
+    </tr>
+  </table>
+  {% endif %}
+    {% if place.photo_url %}
+      <img src="{{ place.photo_url }}" alt="Image" />
+    {% endif %}
   {% if activities %}
+  <table>
+    
     {% for entry in activities %}
-      {{ entry.activity.name }} <br />
-      {{ entry.activity.has_trainer }} <br />
-      {{ entry.activity.duration }} <br />
-      {{ entry.activity.worktime }} <br />
+    <tr>
+      <td class="field">{{ entry.activity.name }}</td>
+      <td class="value">
+      {% if entry.activity.has_trainer %}
+        С треньор
+      {% else %}
+        Без треньор
+      {% endif %}
+      </td>
+      <td class="field">
+        {{ entry.activity.worktime }}
+      </td>
+      <td class="value">
+        Цена: {{ entry.activity.price }} лв.
+      </td>
+    </tr>
     {% endfor %}
+
+  </table>
   {% endif %}
 </div>
