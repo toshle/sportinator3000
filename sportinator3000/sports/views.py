@@ -45,13 +45,13 @@ def user_logout(request):
 
 def user_register_form(request):
     if request.user.is_authenticated():
-      return render(request, 'sports/home.html', {})
+        return render(request, 'sports/home.html', {})
     return render(request, 'sports/register.html', {})
 
 
 def user_register(request):
     if request.user.is_authenticated():
-      return render(request, 'sports/home.html', {})
+        return render(request, 'sports/home.html', {})
     user = User.objects.create_user(request.POST['username'],
                                     request.POST['email'],
                                     request.POST['password'])
