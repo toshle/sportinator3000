@@ -44,12 +44,14 @@ def user_logout(request):
 
 
 def user_register_form(request):
-  return render(request, 'sports/register.html', {})
+    return render(request, 'sports/register.html', {})
 
 
 def user_register(request):
-  user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
-  return render(request, 'sports/home.html', {})
+    user = User.objects.create_user(request.POST['username'],
+                                    request.POST['email'],
+                                    request.POST['password'])
+    return render(request, 'sports/home.html', {})
 
 
 def nearby(request):
@@ -63,7 +65,7 @@ def nearby(request):
         phi2 = (90.0 - latitude2)*degrees_to_radians
         theta1 = longitude1*degrees_to_radians
         theta2 = longitude2*degrees_to_radians
-        cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) + 
+        cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) +
                math.cos(phi1)*math.cos(phi2))
         arc = math.acos(cos)
 
@@ -77,15 +79,15 @@ def nearby(request):
     context = []
     for place in close_places:
         json_place = {
-            'name' : place.name,
-            'latitude' : place.latitude,
-            'longitude' : place.longitude,
-            'description' : place.description,
-            'address' : place.address,
-            'city' : place.city,
-            'photo_url' : place.photo_url,
-            'video_url' : place.video_url,
-            'date_added' : place.date_added,}
+            'name': place.name,
+            'latitude': place.latitude,
+            'longitude': place.longitude,
+            'description': place.description,
+            'address': place.address,
+            'city': place.city,
+            'photo_url': place.photo_url,
+            'video_url': place.video_url,
+            'date_added': place.date_added}
         context.append(json_place)
 
     return render(request, 'sports/nearby.html', json.dumps(context))
