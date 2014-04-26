@@ -214,8 +214,13 @@ img {
   border: 1px solid black;
 }
 
--moz-document url-prefix() {
+select {
+  
+}
+
+@-moz-document url-prefix() {
   select {
+    background: url(/assets/img/arrow.png) no-repeat right #fff !important;
     -moz-appearance: none;
     text-indent: 0.01px;
     text-overflow: '';
