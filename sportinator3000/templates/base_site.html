@@ -8,12 +8,16 @@
 <body>
   <article></article>
 
+  <script src="/assets/js/geolocation.js"></script>
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+  <script src="/assets/js/drawmap.js"></script>
+
   <header>
     <nav>
     <a href="/home">Начало</a>
     <a href="/sports">Търсене</a>
     {% if user.is_active %}
-    <a href="/profile/{{ user.id }}">Профил</a>
+      <a href="/profile/{{ user.id }}">Профил</a>
     {% endif %}
     <a href="/about">За нас</a>
     </nav>
@@ -83,8 +87,6 @@
   </div>
   {% endif %}
 
-  <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
-  <script src="/assets/js/map.js"></script>
   <script src="/assets/js/slide.js"></script>
   <script src="/assets/js/popups.js"></script>
 </body>
