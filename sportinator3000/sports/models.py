@@ -47,6 +47,7 @@ class Place(models.Model):
                 'city': place.city,
                 'photo_url': place.photo_url,
                 'video_url': place.video_url,
+                'user_id': place.user_id,
                 'date_added': 'place.date_added'}
             context.append(json_place)
         return json.dumps(context)
