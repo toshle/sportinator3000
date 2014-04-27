@@ -12,11 +12,12 @@ Map.PlaceMarkers = function(url) {
   };
 
   function placeMarkers(Objects) {
-    console.log(Objects);
     for (var Index in Objects) {
       var MarkerObj = Objects[Index];
+      if (Map.Markers === undefined)
+        Map.Markers = []
 
-      Marker = new google.maps.Marker({
+      Marker = Map.Markers[Index] = new google.maps.Marker({
         position: new google.maps.LatLng(
               MarkerObj.latitude,
               MarkerObj.longitude
@@ -25,7 +26,6 @@ Map.PlaceMarkers = function(url) {
         title: MarkerObj.name
       });
 
-        console.log(MarkerObj);
       Marker.Info = new google.maps.InfoWindow({
         content: '<a style="color: #357" href="details/' + MarkerObj.id + '">' +
           MarkerObj.description + '</a>'
@@ -43,8 +43,8 @@ Map.PlaceAllMarkers = function() {
 
 Map.PlaceFilteredMarkers = function() {
   Map.PlaceMarkers('api/filters?latitude=' + Map.Position.k +
-      '&longitude=' + Map.Position.A + '&radius=' + Map.SearchRadius
-      );
+      '&longitude=' + Map.Position.A + '&radius=' + Map.Attrs.Radius
+    );
 };
 
 Map.OpenInfo = function() {
