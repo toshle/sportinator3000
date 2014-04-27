@@ -63,10 +63,15 @@ Map.OpenInfo = function() {
   }, 3000);
 };
 
-Map.AddMarker = function(location) {
-  Map.NewMarker = new google.maps.Marker({
-    position: location,
-    map: Map.Map,
-    title: 'New Marker'
-  });
+Map.AddMarker = function(e) {
+  if (Map.NewMarker === undefined)
+    Map.NewMarker = new google.maps.Marker({
+      position: e.latLng,
+      map: Map.Map,
+      title: 'New Marker',
+      icon: '/assets/img/flag.png'
+    });
+  else
+    Map.NewMarker.setPosition(e.latLng);
+
 };
