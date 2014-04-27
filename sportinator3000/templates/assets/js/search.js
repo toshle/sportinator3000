@@ -1,6 +1,6 @@
 (function() {
   Map.DrawRadius = function() {
-    var populationOptions = {
+    var Options = {
       strokeColor: '#FF0000',
       strokeOpacity: 0.8,
       strokeWeight: 2,
@@ -11,7 +11,7 @@
       radius: Map.Attrs.Radius * 1000
     };
 
-    Map.Circle = new google.maps.Circle(populationOptions);
+    Map.Circle = new google.maps.Circle(Options);
   };
 
   Map.FilteredDraw = function() {
@@ -59,4 +59,14 @@
     for (var Index in Map.Markers) {
       Map.Markers[Index].setMap(null);
   }};
+
+  Map.Move = function(e) {
+    window.pos.lat = e.latLng.k;
+    window.pos.lng = e.latLng.A;
+    Map.Position =  new google.maps.LatLng(
+              window.pos.lat,
+              window.pos.lng
+        );
+    Map.RedrawFiltered();
+};
 })();
