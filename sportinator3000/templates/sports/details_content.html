@@ -1,50 +1,53 @@
 <div id="content">
-  <button id="back_button" onclick="history.back();">Назад</button>
   {% if place %}
-  <table>
+  <table style="margin-top: 20px; margin-bottom: 10px; box-shadow: 10px 10px 5px #888888;">
     <tr>
-      <td class="field">Място</td>
-      <td class="value">{{ place.name }}</td>
-    </tr>
-    <tr>
-      <td class="field">Град</td>
-      <td class="value">{{ place.city }}</td>
-    </tr>
-    <tr>
-      <td class="field">Адрес</td>
-      <td class="value">{{ place.address }}</td>
-    </tr>
-    <tr>
+      <td class="field" width="100" height="40">Място</td>
+      <td class="field" width="100">Град</td>
+      <td class="field" width="200">Адрес</td>
       <td class="field">Описание</td>
+    </tr>
+    <tr>
+      <td class="value">{{ place.name }}</td>
+      <td class="value">{{ place.city }}</td>
+      <td class="value">{{ place.address }}</td>
       <td class="value">{{ place.description }}</td>
     </tr>
   </table>
   {% endif %}
-    {% if place.photo_url %}
-      <img src="{{ place.photo_url }}" alt="Image" />
-    {% endif %}
+
+  {% if place.photo_url %}
+    <img src="{{ place.photo_url }}" alt="Image" style="box-shadow: 10px 10px 5px #888888;"/>
+  {% endif %}
+
   {% if activities %}
-  <table>
-    
+  <table style="box-shadow: 10px 10px 5px #888888;">
+    <tr>
+      <td>Дейност</td>
+      <td>С треньор</td>
+      <td>Работно време</td>
+      <td>Цена</td>
+    </tr>
     {% for entry in activities %}
     <tr>
       <td class="field">{{ entry.activity.name }}</td>
       <td class="value">
       {% if entry.activity.has_trainer %}
-        С треньор
+        &#10004;
       {% else %}
-        Без треньор
+        &#10008;
       {% endif %}
       </td>
       <td class="field">
         {{ entry.activity.worktime }}
       </td>
       <td class="value">
-        Цена: {{ entry.activity.price }} лв.
+        {{ entry.activity.price }} лв.
       </td>
     </tr>
     {% endfor %}
 
   </table>
   {% endif %}
+  <button id="back_button" onclick="history.back();">Назад</button>
 </div>

@@ -205,6 +205,7 @@ p {
 }
 
 img {
+
 }
 
 .info {
@@ -262,7 +263,7 @@ img {
   bottom: 30px;
   width: 100%;
   left: 0;
-  padding: 0 50px 20px 50px;
+  padding: 0 50px 10px 50px;
   background-color: rgba(255, 255, 255, 0.7);
 }
 
@@ -289,23 +290,18 @@ img {
 
 #content table {
   text-align: left;
-  width: 600px;
+  width: 700px;
   margin: auto;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  font-size: 15px;
+  margin-top: 8px;
+  margin-bottom: 00px;
+  border: 2px solid rgba(0, 0, 0, 0.8);
 }
 
 #content td {
-  padding: 2px;
-}
-
-#content .field {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-#content .value {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+  padding-top: 1px;
+  padding-bottom: 1px;
+  text-align: center;
 }
 
 .photo {
@@ -316,16 +312,19 @@ img {
 }
 
 #content img {
-  width: 595px;
+  border: 2px solid;
+  width: 700px;
+  height: 350px;
 }
 
 #back_button {
   background-color: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(0, 0, 0, 0.5);
-  width: 100px;
-  height: 20px;
+  width: 130px;
+  height: 25px;
   border-radius: 10px;
   color: white;
   cursor: pointer;
-  margin-top: 5px;
+  font-size: 14px;
+  margin-top: 25px;
 }
