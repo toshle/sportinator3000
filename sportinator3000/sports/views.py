@@ -35,13 +35,11 @@ def filters(request):
     return HttpResponse(content=Place.to_json(map(lambda x: x.place, close_places)))
 
 def sports(request):
-    return render(request, 'sports/sports.html')
+    return render(request, 'sports/sports.html',
+            {'sports': Sport.objects.all()})
+
 
 def sports_content(request):
-    latitude1 = float(request.GET['latitude'])
-    longitude1 = float(request.GET['longitude'])
-    radius = float(request.GET['radius'])
-
     def distance_between_points(latitude1, longitude1, latitude2, longitude2):
         degrees_to_radians = math.pi/180.0
         phi1 = (90.0 - latitude1)*degrees_to_radians

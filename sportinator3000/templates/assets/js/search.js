@@ -46,17 +46,16 @@
     Map.Attrs.Price = this.value;
     Map.RedrawFiltered();
   };
+
+  Map.RedrawFiltered = function() {
+    Map.Circle.setMap(null);
+    Map.RemoveAllMarkers();
+    Map.DrawRadius();
+    Map.PlaceFilteredMarkers();
+  };
+
+  Map.RemoveAllMarkers = function() {
+    for (var Index in Map.Markers) {
+      Map.Markers[Index].setMap(null);
+  }};
 })();
-
-Map.RedrawFiltered = function() {
-  Map.Circle.setMap(null);
-  Map.RemoveAllMarkers();
-  Map.DrawRadius();
-  Map.PlaceFilteredMarkers();
-};
-
-Map.RemoveAllMarkers = function() {
-  for (var Index in Map.Markers) {
-    Map.Markers[Index].setMap(null);
-  }
-};
