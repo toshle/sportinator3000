@@ -159,7 +159,7 @@ def activity_register_form(request):
     activity = Activity(sport_id=Sport.objects.get
                         (id=request.POST['sport']).id,
                         name=request.POST['name'],
-                        has_trainer=request.POST['has_trainer'],
+                        has_trainer=request.GET.get('has_trainer', 0),
                         price=request.POST['price'],
                         duration=request.POST['duration'],
                         worktime=request.POST['worktime'],
