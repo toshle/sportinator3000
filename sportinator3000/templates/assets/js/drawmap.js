@@ -10,9 +10,12 @@ Map = {};
     };
 
   Map.Position = new google.maps.LatLng(window.pos.lat, window.pos.lng);
-
-  Map.SearchRadius = 1;
-
+  Map.Attrs = {
+    Radius: 1,
+    Sport: 0,
+    Period: 0,
+    Price: 200,
+  };
   Map.Options = {
       zoom: 16,
       center: Map.Position,
@@ -23,9 +26,16 @@ Map = {};
 
   function LoadMap() {
     Map.Map = new google.maps.Map(Map.Host, Map.Options);
-    if (Map.DrawRadius !== undefined)
-      Map.DrawRadius();
+    if (Map.FilteredDraw !== undefined)
+      Map.FilteredDraw();
     else if (Map.PlaceAllMarkers !== undefined)
       Map.PlaceAllMarkers();
+  }
+
+  google.maps.event.addListener(Map, 'center_changed', UpdateCoords);
+
+  function UpdateCoords(e) {
+    console.log(e);
+    // window.pos.lng = 
   }
 })();
