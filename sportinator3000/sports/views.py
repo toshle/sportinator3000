@@ -123,7 +123,7 @@ def user_edit(request):
         return render(request, 'sports/home.html', {'messages': notifications})
 
 def sport_register_form(request):
-    sport = Sport(request.POST['name'], request.POST['photo_url'])
+    sport = Sport(request.POST['name'], request.POST['photo_url'], request.POST['user_id'])
     sport.save()
     return render(request, 'sports/home.html', {})
 
@@ -133,20 +133,27 @@ def place_register_form(request):
                   request.POST['address'], request.POST['photo_url'],
                   request.POST['video_url'], request.POST['latitude'],
                   request.POST['longitude'], request.POST['description'],
-                  request.POST['date_added'])
+                  request.POST['date_added'], request.POST['user_id'])
     place.save()
+    return render(request, 'sports/place_detail.html', {})
+
+
+def activity_register_form(request):
+    activity = Activity(Sport.objects.get(id=request.POST['sport']),
+                                    request.POST['activity_name'],
+                                    request.POST['has_trainer'],
+                                    request.POST['price'],
+                                    request.POST['duration'],
+                                    request.POST['worktime'],
+                                    request.POST['user_id']))
+    activity.save()
     return render(request, 'sports/place_detail.html', {})
 
 
 def place_activity_register_form(request):
     place_activity = PlaceActivity(Place.objects.get(id=request.POST['place']),
-                                   Activity(Sport.objects
-                                            .get(id=request.POST['sport']),
-                                            request.POST['activity_name'],
-                                            request.POST['has_trainer'],
-                                            request.POST['price'],
-                                            request.POST['duration'],
-                                            request.POST['worktime']))
+                                   Activity.objects.get(id=request.POST['activity'])
+
     place_activity.save()
     return render(request, 'sports/place_activity_detail.html', {})
 
