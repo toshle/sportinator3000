@@ -1,6 +1,6 @@
 <div id="content">
   {% if place %}
-  <table style="margin-top: 20px; margin-bottom: 10px; box-shadow: 10px 10px 5px #888888;">
+  <table id="upper_table">
     <tr>
       <td class="field" width="100" height="40">Място</td>
       <td class="field" width="100">Град</td>
@@ -17,31 +17,31 @@
   {% endif %}
 
   {% if place.photo_url %}
-    <img src="{{ place.photo_url }}" alt="Image" style="box-shadow: 10px 10px 5px #888888;"/>
+    <img src="{{ place.photo_url }}" alt="Image"/>
   {% endif %}
 
   {% if activities %}
-  <table style="box-shadow: 10px 10px 5px #888888;">
+  <table id="bottom_table">
     <tr>
-      <td>Дейност</td>
-      <td>С треньор</td>
-      <td>Работно време</td>
-      <td>Цена</td>
+      <td class="field">Дейност</td>
+      <td class="field">С треньор</td>
+      <td class="field">Работно време</td>
+      <td class="field">Цена</td>
     </tr>
     {% for entry in activities %}
     <tr>
-      <td class="field">{{ entry.activity.name }}</td>
-      <td class="value">
+      <td>{{ entry.activity.name }}</td>
+      <td >
       {% if entry.activity.has_trainer %}
         &#10004;
       {% else %}
         &#10008;
       {% endif %}
       </td>
-      <td class="field">
+      <td >
         {{ entry.activity.worktime }}
       </td>
-      <td class="value">
+      <td>
         {{ entry.activity.price }} лв.
       </td>
     </tr>

@@ -289,6 +289,7 @@ img {
 }
 
 #content table {
+  background-color: rgba(255, 255, 255, 0.6);
   text-align: left;
   width: 700px;
   margin: auto;
@@ -315,6 +316,8 @@ img {
   border: 2px solid;
   width: 700px;
   height: 350px;
+  margin-top: 10px;
+  box-shadow: 10px 10px 5px #888888;
 }
 
 #back_button {
@@ -327,4 +330,19 @@ img {
   cursor: pointer;
   font-size: 14px;
   margin-top: 25px;
+}
+
+#upper_table {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  box-shadow: 10px 10px 5px #888888;
+}
+
+#bottom_table {
+  box-shadow: 10px 10px 5px #888888;
+}
+
+.field {
+  background-color: rgba(0, 0, 0, 0.15);
+  
 }
