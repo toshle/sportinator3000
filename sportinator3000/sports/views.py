@@ -139,15 +139,19 @@ def place_register_form(request):
 
 
 def activity_register_form(request):
-    activity = Activity(Sport.objects.get(id=request.POST['sport']),
-                                    request.POST['activity_name'],
-                                    request.POST['has_trainer'],
-                                    request.POST['price'],
-                                    request.POST['duration'],
-                                    request.POST['worktime'],
-                                    request.POST['user_id'])
+    activity = Activity(sport_id=Sport.objects.get(id=request.POST['sport']).id,
+                                    name=request.POST['name'],
+                                    has_trainer=request.POST['has_trainer'],
+                                    price=request.POST['price'],
+                                    duration=request.POST['duration'],
+                                    worktime=request.POST['worktime'],
+                                    user_id=request.POST['user_id'])
     activity.save()
-    return render(request, 'sports/place_detail.html', {})
+
+    placeactivity = PlaceActivity(place_id=request.POST['place_id'],
+                                  activity_id=activity.id)
+    placeactivity.save()
+    return redirect('/details/' + str(placeactivity.place.id))
 
 
 def place_activity_register_form(request):
@@ -198,6 +202,8 @@ def user_forgotten(request):
 def place_details(request, place_id):
     notifications = []
     place = Place.objects.get(pk=place_id)
+    sports = Sport.objects.all()
     activities = PlaceActivity.objects.filter(place_id=place_id)
     return render(request, 'sports/details.html',
-                  {'place': place, 'activities': activities})
+                  {'place': place, 'activities': activities,
+                   'sports': sports,})
