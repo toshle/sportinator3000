@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^edit', views.user_edit, name='edit'),
     url(r'^forgotten', views.user_forgotten, name='forgotten'),
     url(r'^add_activity', views.activity_register_form, name='add_activity'),
+    url(r'^add_place', views.place_register_form, name='add_place'),
     url(r'^about', views.about, name='about'),
     url(r'^api/all', views.all_places, name='all_places'),
     url(r'^api/filter', views.filters, name='filters'),
