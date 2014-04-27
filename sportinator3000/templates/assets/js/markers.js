@@ -67,7 +67,7 @@ Map.OpenInfo = function() {
 };
 
 Map.AddMarker = function(e) {
-  if (Map.NewMarker === undefined) {
+  if (LoggedIn && Map.NewMarker === undefined) {
     Map.NewMarker = new google.maps.Marker({
       position: e.latLng,
       map: Map.Map,
@@ -76,20 +76,22 @@ Map.AddMarker = function(e) {
     });
 
     Orig = document.getElementById('add');
-    date = new Date();
-    dateStr = date.getYear() + '-' + date.getMonth() + '-' + date.getDay() +
-      ' ' + date.getHours() + ':' + date.getMinutes();
-    console.log(dateStr);
-
     Map.NewMarker.Modal = document.createElement('div');
     Map.NewMarker.Modal.className = 'modal';
+    Map.NewMarker.Modal.id = 'add';
     Map.NewMarker.Modal.innerHTML = Orig.innerHTML;
     document.body.appendChild(Map.NewMarker.Modal);
-    document.getElementsByName('latitude')[0].value = e.latLng.k;
-    document.getElementsByName('longitude')[0].value = e.latLng.A;
-    document.getElementsByName('date_added')[0].value = dateStr;
-
     Map.NewMarker.Modal.style.visibility = 'visible';
+    window.pos.lat = e.latLng.k;
+    window.pos.lng = e.latLng.A;
+    var Inputs = document.getElementsByName('name');
+    for (var Index in Inputs) {
+      if(!isNaN(Index))
+        Inputs[Index].focus();
+    }
+
+    Orig = document.getElementById('add');
+    Map.InitNewPlace();
   }
 };
 
@@ -97,4 +99,14 @@ Map.RemoveAddMarker = function() {
   document.body.removeChild(Map.NewMarker.Modal);
   Map.NewMarker.setMap(null);
   Map.NewMarker = undefined;
-}
+};
+
+Map.InitNewPlace = function(e) {
+  date = new Date();
+  dateStr = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + 
+    date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes();
+
+  document.getElementsByName('latitude')[1].value = window.pos.lat;
+  document.getElementsByName('longitude')[1].value = window.pos.lng;
+  document.getElementsByName('date_added')[1].value = dateStr;
+};

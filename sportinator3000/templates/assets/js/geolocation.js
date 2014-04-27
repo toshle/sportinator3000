@@ -1,4 +1,9 @@
+var LoggedIn = document.getElementById('add') !== null;
+
 (function() {
+  if (location.href.indexOf('home') !== -1)
+    location.replace('/');
+
   if (navigator.geolocation)
     navigator.geolocation.getCurrentPosition(SetGeoLocation);
 

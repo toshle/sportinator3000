@@ -5,8 +5,10 @@ Map = {};
 
   if (window.pos === undefined)
     window.pos = {
-      lat: 42.687562,
-      lng: 23.335213
+      lat: 42.674574,
+      lng: 23.330401
+      // lat: 42.687562,
+      // lng: 23.335213
     };
 
   Map.Position = new google.maps.LatLng(window.pos.lat, window.pos.lng);
@@ -19,12 +21,14 @@ Map = {};
   Map.Options = {
       zoom: 16,
       center: Map.Position,
+      disableDoubleClickZoom: true,
       disableDefaultUI: true
   };
 
   google.maps.event.addDomListener(window, 'load', LoadMap);
 
   function LoadMap() {
+    LoggedIn = document.getElementById('add') !== null;
     Map.Map = new google.maps.Map(Map.Host, Map.Options);
     if (Map.FilteredDraw !== undefined)
       Map.FilteredDraw();

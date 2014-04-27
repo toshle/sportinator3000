@@ -95,11 +95,11 @@
     <div>
       Добавяне на място
       <button onclick="Map.RemoveAddMarker();">&times;</button>
-      <form method="get" action="/add_place">
+      <form method="post" action="/add_place" name="new">
           {% csrf_token %}
-          <input type="name" name="name" placeholder="Име" />
+          <input type="text" name="name" placeholder="Име" required />
           <br />
-          <textarea name="description" placeholder="Описание" ></textarea>
+          <textarea name="description" placeholder="Описание" required ></textarea>
           <br />
           <input type="hidden" name="latitude">
           <input type="hidden" name="longitude">
@@ -108,7 +108,7 @@
           <input type="hidden" name="photo_url" value="">
           <input type="hidden" name="video_url" value="">
           <input type="hidden" name="date_added">
-          <input type="hidden" name="user_id" value="1">
+          <input type="hidden" name="user_id" value="{{ user.id }}">
           <input type="submit" name="submit" value="Изпрати" />
       </form>
     </div>
