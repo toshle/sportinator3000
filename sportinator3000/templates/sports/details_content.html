@@ -5,6 +5,7 @@
   <div id="add_activity_popup" class="modal">
     <div id="add_activity_form">
       Добавяне на дейност
+      <button class="close" onclick="CloseModals();">&times;</button>
       <form method="post" action="/add_activity">
         {% csrf_token %}
         Спорт: 
@@ -18,7 +19,7 @@
         <br />
         <input placeholder="Име на дейност" type="text" name="name" required />
         <br />
-        Има ли треньор? <input type="checkbox" name="has_trainer" />
+        Има ли треньор? <input type="checkbox" name="has_trainer" value="1"/>
         <br />
         <input type="text" name="price" required placeholder="Цена (в лева)" />
         <br />

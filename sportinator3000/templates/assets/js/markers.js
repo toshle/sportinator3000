@@ -33,9 +33,12 @@ Map.PlaceMarkers = function(url) {
 
       google.maps.event.addListener(Marker, 'click', Map.OpenInfo);
       google.maps.event.addListener(Map.Map, 'dblclick', Map.AddMarker);
-      if (Map.Circle)
+      if (Map.Circle) {
         google.maps.event.addListener(Map.Circle, 'dblclick', Map.AddMarker);
-      google.maps.event.addListener(Map.Map, 'rclick', Map.AddMarker);
+        google.maps.event.addListener(Map.Circle, 'rightclick', Map.Move);
+        google.maps.event.addListener(Map.Map, 'dblclick', Map.AddMarker);
+        google.maps.event.addListener(Map.Map, 'rightclick', Map.Move);
+      }
     }
   }
 };
