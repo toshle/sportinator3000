@@ -1,5 +1,17 @@
 Map = {};
 
+// Dirty fix
+function CloseModals() {
+  Modals = document.getElementsByTagName('div');
+  for (var Index in Modals) {
+    if (!isNaN(Index) && Modals[Index] !== undefined && Modals[Index].className.indexOf('modal') !== -1) {
+      Modals[Index].style.visibility = 'hidden';
+      if (Map.NewMarker !== undefined)
+        Map.RemoveAddMarker();
+    }
+  }
+}
+
 (function() {
   Map.Host = document.getElementsByTagName('article')[0];
 

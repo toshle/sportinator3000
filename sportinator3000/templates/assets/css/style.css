@@ -272,7 +272,7 @@ img {
   border-radius: 10px;
 }
 
-#add button {
+button.close {
   border: none;
   width: 20px;
   height: 20px;
@@ -281,7 +281,7 @@ img {
   font-size: 13px;
 }
 
-#add button:hover {
+button.close:hover {
   background: #CCC;
   color: #37A;
 }

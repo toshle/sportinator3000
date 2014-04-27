@@ -45,4 +45,25 @@
     var el = document.getElementById("register_popup");
     el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
   }
+
+  var forgotten_link  = document.getElementById("forgotten_link");
+  var forgotten_field = document.getElementById("forgotten_popup");
+  var forgotten_form  = document.getElementById("forgotten_form");
+
+  if (forgotten_field != undefined || forgotten_field != null) {
+    forgotten_field.addEventListener('click', forgotten_onclick, false);
+    forgotten_link.addEventListener('click', forgotten_onclick, false);
+    forgotten_form.addEventListener('click', noclose, false);
+  }
+
+  function forgotten_onclick(e) {
+    e.preventDefault();
+    forgotten_popup();
+  }
+
+  function forgotten_popup() {
+    var el = document.getElementById("forgotten_popup");
+    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+  }
+
 })();

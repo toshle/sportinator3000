@@ -63,6 +63,7 @@
   <div id="register_popup" class="modal">
     <div id="register_form">
       Регистрация
+      <button class="close" onclick="CloseModals();">&times;</button>
       <form method="post" action="/register" >
           {% csrf_token %}
           <input placeholder="Потребителско име" type="text" name="username" required />
@@ -79,6 +80,7 @@
   <div id="forgotten_popup" class="modal">
     <div id="forgotten_form">
       Забравена парола
+      <button class="close" onclick="CloseModals();">&times;</button>
       <form method="post" action="/forgotten_password">
           {% csrf_token %}
           <input placeholder="Потребителско име" type="text" name="username" required />
@@ -94,7 +96,7 @@
   <div id="add" class="modal">
     <div>
       Добавяне на място
-      <button onclick="Map.RemoveAddMarker();">&times;</button>
+      <button class="close" onclick="Map.RemoveAddMarker();">&times;</button>
       <form method="post" action="/add_place" name="new">
           {% csrf_token %}
           <input type="text" name="name" placeholder="Име" required />

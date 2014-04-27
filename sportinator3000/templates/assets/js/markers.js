@@ -1,15 +1,3 @@
-// Dirty fix
-function CloseModals() {
-  Modals = document.getElementsByTagName('div');
-  for (var Index in Modals) {
-    if (!isNaN(Index) && Modals[Index] !== undefined && Modals[Index].className.indexOf('modal') !== -1) {
-      Modals[Index].style.visibility = 'hidden';
-      if (Map.NewMarker !== undefined)
-        Map.RemoveAddMarker();
-    }
-  }
-}
-
 Map.PlaceMarkers = function(url) {
   var Base = window.location.href.match(/^(?:\/\/|[^\/]+)*\//),
     Request = new XMLHttpRequest();
@@ -43,7 +31,6 @@ Map.PlaceMarkers = function(url) {
           MarkerObj.description + '</a>'
       });
 
-      google.maps.event.addListener(Map.Map, 'click', CloseModals);
       google.maps.event.addListener(Marker, 'click', Map.OpenInfo);
       google.maps.event.addListener(Map.Map, 'dblclick', Map.AddMarker);
       if (Map.Circle)

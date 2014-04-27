@@ -5,6 +5,7 @@
   <div id="add_activity_popup" class="modal">
     <div id="add_activity_form">
       Добавяне на дейност
+      <button class="close" onclick="CloseModals();">&times;</button>
       <form method="post" action="/add_activity">
         {% csrf_token %}
         Спорт: 
