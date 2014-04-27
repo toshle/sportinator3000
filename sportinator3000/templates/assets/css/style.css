@@ -11,6 +11,8 @@ body, article {
   font-family: Verdana;
   background-color: #F1EEE8;
   z-index: -1;
+  min-width: 600px;
+  min-height: 400px;
   transform-style: preserve-3d;
 }
 
