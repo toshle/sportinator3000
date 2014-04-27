@@ -64,14 +64,22 @@ Map.OpenInfo = function() {
 };
 
 Map.AddMarker = function(e) {
-  if (Map.NewMarker === undefined)
+  if (Map.NewMarker === undefined) {
     Map.NewMarker = new google.maps.Marker({
       position: e.latLng,
       map: Map.Map,
       title: 'New Marker',
       icon: '/assets/img/flag.png'
     });
-  else
-    Map.NewMarker.setPosition(e.latLng);
 
+    Orig = document.getElementById('add');
+    Map.AddModal = document.createElement('div');
+    Map.AddModal.className = 'modal';
+    Map.AddModal.innerHTML = Orig.innerHTML;
+    document.body.appendChild(Map.AddModal);
+
+    Map.AddModal.style.visibility = 'visible';
+    Map.AddModal.style.top = e.pixel.y - 150 + 'px';
+    Map.AddModal.style.left = e.pixel.x - 450 + 'px';
+  }
 };

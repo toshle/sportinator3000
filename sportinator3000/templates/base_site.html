@@ -87,6 +87,22 @@
       </form>
     </div>
   </div>
+
+  {% else %}
+  <div id="add" class="modal">
+    <div>
+      Ново място
+      <form method="post" action="/add_place">
+          {% csrf_token %}
+          <input type="name" name="name" placeholder="Име на мястото" />
+          <br />
+          <textarea name="description" placeholder="Описание" ></textarea>
+          <br />
+          <input type="submit" name="submit" value="Изпрати" />
+          <button onclick="body.document.removeChild(Map.AddModal);">Close</button>
+      </form>
+    </div>
+  </div>
   {% endif %}
 
   <!-- <script src="/assets/js/slide.js"></script> -->

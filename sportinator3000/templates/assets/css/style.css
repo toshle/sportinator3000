@@ -256,6 +256,8 @@ img {
   width:100%;
   height:100%;
   text-align:center;
+  display: block;
+  vertical-align: middle;
   z-index: 1000;
 }
 
@@ -263,10 +265,19 @@ img {
   width: 300px;
   margin: 10% auto;
   background-color: rgba(255, 255,255, 0.7);
-  border:1px solid rgba(0, 0, 0, 0.5);
-  padding:15px;
-  text-align:center;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  text-align: center;
   border-radius: 10px;
+}
+
+textarea {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  margin: 5px 20px;
+  border-radius: 3px;
+  width: 176px;
+  text-align: center;
+  resize: none;
 }
 
 #content table {
