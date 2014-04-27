@@ -33,7 +33,12 @@
     </div>
     {% else %}
     <div id="logged_in">
-      Здравей, <a href="/profile/{{ user.id }}">{% firstof user.get_short_name user.get_username %}</a> | <a href="/logout">Изход</a>
+      Здравей, <a href="/profile/{{ user.id }}">{% firstof user.get_short_name user.get_username %}</a>!
+      {% if user.is_staff %}
+        | <a href="/admin">Админ</a>
+      {% endif %}
+       | <a href="/logout">Изход</a>
+      
     </div>
     {% endif %}
   </header>
