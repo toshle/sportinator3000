@@ -51,9 +51,6 @@ Map.PlaceFilteredMarkers = function() {
   if (Map.Attrs.Duration != 0)
     Str += '&duration=' + Map.Attrs.Duration;
 
-  if (Map.Attrs.Price != 0)
-    Str += '&price=' + Map.Attrs.Price;
-
   Map.PlaceMarkers(Str);
 };
 
