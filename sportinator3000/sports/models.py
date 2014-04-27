@@ -27,6 +27,7 @@ class Place(models.Model):
     longitude = models.FloatField()
     description = models.TextField()
     date_added = models.DateTimeField(default=datetime.now())
+    user = models.ForeignKey(User)
 
     @classmethod
     def get_all(cls):
@@ -57,6 +58,7 @@ class Place(models.Model):
 class Sport(models.Model):
     name = models.CharField(max_length=100)
     photo_url = models.CharField(max_length=300, blank=True)
+    user = models.ForeignKey(User)
 
     @classmethod
     def get_all(cls):
@@ -73,6 +75,7 @@ class Activity(models.Model):
     price = models.FloatField()
     duration = models.IntegerField()
     worktime = models.CharField(max_length=50)
+    user = models.ForeignKey(User)
 
     @classmethod
     def get_all(cls):
