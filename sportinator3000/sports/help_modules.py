@@ -1,5 +1,6 @@
 import math
 
+
 def distance_between_points(latitude1, longitude1, latitude2, longitude2):
     degrees_to_radians = math.pi/180.0
     phi1 = (90.0 - latitude1)*degrees_to_radians
@@ -11,25 +12,29 @@ def distance_between_points(latitude1, longitude1, latitude2, longitude2):
     arc = math.acos(cos)
     return arc*6373
 
+
 def filter_by_sport(data, sport_name):
     return data.filter(activity__sport__id=sport_name)
+
 
 def filter_by_duration(data, duration):
     return data.filter(activity__duration__lte=duration)
 
+
 def filter_by_price(data, price):
     return data.filter(activity__price__lte=price)
+
 
 def filter_all(data, sport_name, duration, price):
     result = data
 
-    if sport_name != None:
+    if sport_name is not None:
         result = filter_by_sport(result, sport_name)
 
-    if duration != None:
+    if duration is not None:
         result = filter_by_duration(result, duration)
 
-    if price != None:
+    if price is not None:
         result = filter_by_price(result, price)
 
     return result
