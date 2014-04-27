@@ -145,7 +145,7 @@ def activity_register_form(request):
                                     request.POST['price'],
                                     request.POST['duration'],
                                     request.POST['worktime'],
-                                    request.POST['user_id']))
+                                    request.POST['user_id'])
     activity.save()
     return render(request, 'sports/place_detail.html', {})
 
