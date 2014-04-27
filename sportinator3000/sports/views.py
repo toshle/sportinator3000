@@ -146,7 +146,7 @@ def place_register_form(request):
                   city=request.POST['city'],
                   address=request.POST['address'],
                   photo_url=request.POST['photo_url'],
-                  video_ulr=request.POST['video_url'],
+                  video_url=request.POST['video_url'],
                   latitude=request.POST['latitude'],
                   longitude=request.POST['longitude'],
                   description=request.POST['description'],
