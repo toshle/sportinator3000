@@ -76,10 +76,18 @@ Map.AddMarker = function(e) {
     });
 
     Orig = document.getElementById('add');
+    date = new Date();
+    dateStr = date.getYear() + '-' + date.getMonth() + '-' + date.getDay() +
+      ' ' + date.getHours() + ':' + date.getMinutes();
+    console.log(dateStr);
+
     Map.NewMarker.Modal = document.createElement('div');
     Map.NewMarker.Modal.className = 'modal';
     Map.NewMarker.Modal.innerHTML = Orig.innerHTML;
     document.body.appendChild(Map.NewMarker.Modal);
+    document.getElementsByName('latitude')[0].value = e.latLng.k;
+    document.getElementsByName('longitude')[0].value = e.latLng.A;
+    document.getElementsByName('date_added')[0].value = dateStr;
 
     Map.NewMarker.Modal.style.visibility = 'visible';
   }

@@ -74,8 +74,8 @@ def about_content(request):
 
 
 def user_login(request):
-    username = request.POST['username']
-    password = request.POST['password']
+    username = request.GET['username']
+    password = request.GET['password']
     notifications = []
     user = authenticate(username=username, password=password)
     if user is not None:
@@ -107,9 +107,9 @@ def user_register(request):
     if request.user.is_authenticated():
         notifications.append("Вече сте логнат.")
         return render(request, 'sports/home.html', {'messages': notifications})
-    user = User.objects.create_user(request.POST['username'],
-                                    request.POST['email'],
-                                    request.POST['password'])
+    user = User.objects.create_user(request.GET['username'],
+                                    request.GET['email'],
+                                    request.GET['password'])
     notifications.append("Регистрирахте се успешно.")
     return render(request, 'sports/home.html', {'messages': notifications})
 
@@ -117,12 +117,12 @@ def user_register(request):
 def user_edit(request):
     notifications = []
     if request.user.is_authenticated():
-        if request.user.check_password(request.POST['old_password']):
-            request.user.first_name = request.POST['first_name']
-            request.user.last_name = request.POST['last_name']
-            new_password = request.POST['new_password']
+        if request.user.check_password(request.GET['old_password']):
+            request.user.first_name = request.GET['first_name']
+            request.user.last_name = request.GET['last_name']
+            new_password = request.GET['new_password']
             if new_password and new_password ==\
-               request.POST['new_password_repeat']:
+               request.GET['new_password_repeat']:
                 request.user.set_password(new_password)
             request.user.save()
             notifications.append("Успешно редактиране.")
@@ -136,40 +136,40 @@ def user_edit(request):
 
 
 def sport_register_form(request):
-    sport = Sport(request.POST['name'],
-                  request.POST['photo_url'],
-                  request.POST['user_id'])
+    sport = Sport(request.GET['name'],
+                  request.GET['photo_url'],
+                  request.GET['user_id'])
     sport.save()
     return render(request, 'sports/home.html', {})
 
 
 def place_register_form(request):
-    place = Place(name=request.POST['name'],
-                  city=request.POST['city'],
-                  address=request.POST['address'],
-                  photo_url=request.POST['photo_url'],
-                  video_url=request.POST['video_url'],
-                  latitude=request.POST['latitude'],
-                  longitude=request.POST['longitude'],
-                  description=request.POST['description'],
-                  date_added=request.POST['date_added'],
-                  user_id=request.POST['user_id'])
+    place = Place(name=request.GET['name'],
+                  city=request.GET['city'],
+                  address=request.GET['address'],
+                  photo_url=request.GET['photo_url'],
+                  video_url=request.GET['video_url'],
+                  latitude=request.GET['latitude'],
+                  longitude=request.GET['longitude'],
+                  description=request.GET['description'],
+                  date_added=request.GET['date_added'],
+                  user_id=request.GET['user_id'])
     place.save()
     return render(request, 'sports/place_detail.html', {})
 
 
 def activity_register_form(request):
     activity = Activity(sport_id=Sport.objects.get
-                        (id=request.POST['sport']).id,
-                        name=request.POST['name'],
-                        has_trainer=request.POST['has_trainer'],
-                        price=request.POST['price'],
-                        duration=request.POST['duration'],
-                        worktime=request.POST['worktime'],
-                        user_id=request.POST['user_id'])
+                        (id=request.GET['sport']).id,
+                        name=request.GET['name'],
+                        has_trainer=request.GET['has_trainer'],
+                        price=request.GET['price'],
+                        duration=request.GET['duration'],
+                        worktime=request.GET['worktime'],
+                        user_id=request.GET['user_id'])
     activity.save()
 
-    placeactivity = PlaceActivity(place_id=request.POST['place_id'],
+    placeactivity = PlaceActivity(place_id=request.GET['place_id'],
                                   activity_id=activity.id)
     placeactivity.save()
     return redirect('/details/' + str(placeactivity.place.id))
@@ -177,9 +177,9 @@ def activity_register_form(request):
 
 def place_activity_register_form(request):
     place_activity = PlaceActivity(Place.objects.get
-                                   (id=request.POST['place']),
+                                   (id=request.GET['place']),
                                    Activity.objects.get
-                                   (id=request.POST['activity']))
+                                   (id=request.GET['activity']))
 
     place_activity.save()
     return render(request, 'sports/place_activity_detail.html', {})
@@ -212,15 +212,15 @@ def user_forgotten(request):
     if request.user.is_authenticated():
         notifications.append("Вече сте логнат.")
         return render(request, 'sports/home.html', {'messages': notifications})
-    user = User.objects.get(username=request.POST['username'],
-                            email=request.POST['email'])
+    user = User.objects.get(username=request.GET['username'],
+                            email=request.GET['email'])
     new_password = hashlib.sha224(str(randint(1, 100000000))
                                   .encode('utf-8')).hexdigest()[0:6]
     user.set_password(new_password)
     user.email_user("Новата ви парола", "Новата ви парола е " + new_password)
     user.save()
     notifications.append("Изпратена ви е нова парола на " +
-                         request.POST['email'])
+                         request.GET['email'])
     return render(request, 'sports/home.html', {'messages': notifications})
 
 
