@@ -1,5 +1,40 @@
 <div id="content">
   {% if place %}
+
+  {% if user.is_active %}
+  <div id="add_activity_popup" class="modal">
+    <div id="add_activity_form">
+      Добавяне на дейност
+      <form method="post" action="/add_activity">
+        {% csrf_token %}
+        Спорт: 
+        <select name="sport">
+        {% if sports %}
+            {% for sport in sports %}
+                <option value="{{sport.id}}">{{sport.name}}</option>
+            {% endfor %}
+        {% endif %}
+        </select>
+        <br />
+        <input placeholder="Име на дейност" type="text" name="name" required />
+        <br />
+        Има ли треньор? <input type="checkbox" name="has_trainer" />
+        <br />
+        <input type="text" name="price" required placeholder="Цена (в лева)" />
+        <br />
+        <input type="text" name="duration" required placeholder="Продължителност (в часове)" />
+        <br />
+        <input type="text" name="worktime" required placeholder="Работно време (с думи)" />
+        <br />
+        <input type="hidden" name="user_id" value="{{ user.id }}"/>
+        <input type="hidden" name="place_id" value="{{ place.id }}"/>
+        <input type="submit" name="submit" value="Добави" />
+      </form>
+    </div>
+  </div>
+
+  {% endif %}
+
   <table id="upper_table">
     <tr>
       <td class="field" width="100" height="40">Място</td>
@@ -14,7 +49,6 @@
       <td class="value">{{ place.description }}</td>
     </tr>
   </table>
-  {% endif %}
 
   {% if place.photo_url %}
     <img src="{{ place.photo_url }}" alt="Image"/>
@@ -49,5 +83,14 @@
 
   </table>
   {% endif %}
-  <button id="back_button" onclick="history.back();">Назад</button>
+
+  <button class="button" onclick="history.back();">Назад</button>
+
+  {% if user.is_active %}
+
+  <button id="add_activity_link" class="button" >Добави дейност</button>
+
+  {% endif %}
+
+  {% endif %}
 </div>

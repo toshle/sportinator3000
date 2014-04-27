@@ -53,10 +53,10 @@
   </footer>
 
   {% if not user.is_active %}
-  <div id="register_popup">
+  <div id="register_popup" class="modal">
     <div id="register_form">
       Регистрация
-      <form method="post" action="/register">
+      <form method="post" action="/register" >
           {% csrf_token %}
           <input placeholder="Потребителско име" type="text" name="username" required />
           <br />
@@ -69,7 +69,7 @@
     </div>
   </div>
 
-  <div id="forgotten_popup">
+  <div id="forgotten_popup" class="modal">
     <div id="forgotten_form">
       Забравена парола
       <form method="post" action="/forgotten_password">

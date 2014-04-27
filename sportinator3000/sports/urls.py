@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^register', views.user_register, name='register'),
     url(r'^edit', views.user_edit, name='edit'),
     url(r'^forgotten', views.user_forgotten, name='forgotten'),
+    url(r'^add_activity', views.activity_register_form, name='forgotten'),
     url(r'^about', views.about, name='about'),
     url(r'^api/all', views.all_places, name='all_places'),
     url(r'^api/filter', views.filters, name='filters'),

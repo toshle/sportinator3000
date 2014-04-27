@@ -40,18 +40,6 @@ def sports(request):
 
 
 def sports_content(request):
-    def distance_between_points(latitude1, longitude1, latitude2, longitude2):
-        degrees_to_radians = math.pi/180.0
-        phi1 = (90.0 - latitude1)*degrees_to_radians
-        phi2 = (90.0 - latitude2)*degrees_to_radians
-        theta1 = longitude1*degrees_to_radians
-        theta2 = longitude2*degrees_to_radians
-        cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) +
-               math.cos(phi1)*math.cos(phi2))
-        arc = math.acos(cos)
-
-        return arc*6373
-
     close_places = [place for place in
                     PlaceActivity.objects.filter(
                         activity__sport__id=request.GET['sport'],
@@ -135,7 +123,7 @@ def user_edit(request):
         return render(request, 'sports/home.html', {'messages': notifications})
 
 def sport_register_form(request):
-    sport = Sport(request.POST['name'], request.POST['photo_url'])
+    sport = Sport(request.POST['name'], request.POST['photo_url'], request.POST['user_id'])
     sport.save()
     return render(request, 'sports/home.html', {})
 
@@ -145,20 +133,31 @@ def place_register_form(request):
                   request.POST['address'], request.POST['photo_url'],
                   request.POST['video_url'], request.POST['latitude'],
                   request.POST['longitude'], request.POST['description'],
-                  request.POST['date_added'])
+                  request.POST['date_added'], request.POST['user_id'])
     place.save()
     return render(request, 'sports/place_detail.html', {})
 
 
+def activity_register_form(request):
+    activity = Activity(sport_id=Sport.objects.get(id=request.POST['sport']).id,
+                                    name=request.POST['name'],
+                                    has_trainer=request.POST['has_trainer'],
+                                    price=request.POST['price'],
+                                    duration=request.POST['duration'],
+                                    worktime=request.POST['worktime'],
+                                    user_id=request.POST['user_id'])
+    activity.save()
+
+    placeactivity = PlaceActivity(place_id=request.POST['place_id'],
+                                  activity_id=activity.id)
+    placeactivity.save()
+    return redirect('/details/' + str(placeactivity.place.id))
+
+
 def place_activity_register_form(request):
     place_activity = PlaceActivity(Place.objects.get(id=request.POST['place']),
-                                   Activity(Sport.objects
-                                            .get(id=request.POST['sport']),
-                                            request.POST['activity_name'],
-                                            request.POST['has_trainer'],
-                                            request.POST['price'],
-                                            request.POST['duration'],
-                                            request.POST['worktime']))
+                                   Activity.objects.get(id=request.POST['activity']))
+
     place_activity.save()
     return render(request, 'sports/place_activity_detail.html', {})
 
@@ -203,6 +202,8 @@ def user_forgotten(request):
 def place_details(request, place_id):
     notifications = []
     place = Place.objects.get(pk=place_id)
+    sports = Sport.objects.all()
     activities = PlaceActivity.objects.filter(place_id=place_id)
     return render(request, 'sports/details.html',
-                  {'place': place, 'activities': activities})
+                  {'place': place, 'activities': activities,
+                   'sports': sports,})
