@@ -15,7 +15,7 @@ Map.PlaceMarkers = function(url) {
     for (var Index in Objects) {
       var MarkerObj = Objects[Index];
       if (Map.Markers === undefined)
-        Map.Markers = []
+        Map.Markers = [];
 
       Marker = Map.Markers[Index] = new google.maps.Marker({
         position: new google.maps.LatLng(
@@ -23,7 +23,7 @@ Map.PlaceMarkers = function(url) {
               MarkerObj.longitude
         ),
         map: Map.Map,
-        title: MarkerObj.name
+        title: MarkerObj.name,
       });
 
       Marker.Info = new google.maps.InfoWindow({
@@ -42,11 +42,19 @@ Map.PlaceAllMarkers = function() {
 };
 
 Map.PlaceFilteredMarkers = function() {
-  Map.PlaceMarkers('api/filters?latitude=' + Map.Position.k +
-      '&longitude=' + Map.Position.A + '&radius=' + Map.Attrs.Radius +
-      '&sport=' + Map.Attrs.Sport + '&duration=' + Map.Attrs.Duration +
-      '&price=' + Map.Attrs.Price
-    );
+  var Str = 'api/filters?latitude=' + Map.Position.k +
+      '&longitude=' + Map.Position.A + '&radius=' + Map.Attrs.Radius;
+
+  if (Map.Attrs.Sport != 0)
+    Str += '&sport=' + Map.Attrs.Sport;
+
+  if (Map.Attrs.Duration != 0)
+    Str += '&duration=' + Map.Attrs.Duration;
+
+  if (Map.Attrs.Price != 0)
+    Str += '&price=' + Map.Attrs.Price;
+
+  Map.PlaceMarkers(Str);
 };
 
 Map.OpenInfo = function() {
