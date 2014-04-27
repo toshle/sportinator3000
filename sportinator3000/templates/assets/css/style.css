@@ -196,7 +196,7 @@ input {
   bottom: 30px;
   left: 0;
   padding: 0 50px 0 50px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 p {
@@ -224,11 +224,12 @@ img {
   text-indent: 0px;
 }
 
-#notifications {position:absolute;
-    left:0;
-    right:0;
-    margin-left:auto;
-    margin-right:auto;
+#notifications {
+  position:absolute;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
   z-index: 1001;
   color: white;
   width: 400px;
@@ -262,7 +263,7 @@ img {
   width: 100%;
   left: 0;
   padding: 0 50px 20px 50px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 #forgotten_popup {
@@ -316,4 +317,15 @@ img {
 
 #content img {
   width: 595px;
+}
+
+#back_button {
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  width: 100px;
+  height: 20px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  margin-top: 5px;
 }
