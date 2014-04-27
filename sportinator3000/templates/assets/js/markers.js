@@ -43,7 +43,8 @@ Map.PlaceAllMarkers = function() {
 
 Map.PlaceFilteredMarkers = function() {
   var Str = 'api/filters?latitude=' + Map.Position.k +
-      '&longitude=' + Map.Position.A + '&radius=' + Map.Attrs.Radius;
+      '&longitude=' + Map.Position.A + '&radius=' +
+      Map.Attrs.Radius + '&price=' + Map.Attrs.Price;
 
   if (Map.Attrs.Sport != 0)
     Str += '&sport=' + Map.Attrs.Sport;
@@ -62,7 +63,10 @@ Map.OpenInfo = function() {
   }, 3000);
 };
 
-Map.AddMarker = function() {
-  console.log(this);
-  // this.Info.open(Map.Map, this);
+Map.AddMarker = function(location) {
+  Map.NewMarker = new google.maps.Marker({
+    position: location,
+    map: Map.Map,
+    title: 'New Marker'
+  });
 };
