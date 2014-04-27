@@ -152,7 +152,7 @@ def activity_register_form(request):
 
 def place_activity_register_form(request):
     place_activity = PlaceActivity(Place.objects.get(id=request.POST['place']),
-                                   Activity.objects.get(id=request.POST['activity'])
+                                   Activity.objects.get(id=request.POST['activity']))
 
     place_activity.save()
     return render(request, 'sports/place_activity_detail.html', {})
