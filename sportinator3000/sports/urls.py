@@ -3,7 +3,7 @@ from django.conf.urls import url
 from sports import views
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
+    url(r'^$', views.home, name='root'),
     url(r'^home', views.home, name='home'),
     url(r'^sports', views.sports, name='sports'),
     url(r'^raw/sports', views.sports_content, name='sports_content'),
@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^register', views.user_register, name='register'),
     url(r'^edit', views.user_edit, name='edit'),
     url(r'^forgotten', views.user_forgotten, name='forgotten'),
-    url(r'^add_activity', views.activity_register_form, name='forgotten'),
+    url(r'^add_activity', views.activity_register_form, name='add_activity'),
     url(r'^about', views.about, name='about'),
     url(r'^api/all', views.all_places, name='all_places'),
     url(r'^api/filter', views.filters, name='filters'),
