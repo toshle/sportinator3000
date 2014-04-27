@@ -32,7 +32,10 @@ Map.PlaceMarkers = function(url) {
       });
 
       google.maps.event.addListener(Marker, 'click', Map.OpenInfo);
-      google.maps.event.addListener(Map.Map, 'click', Map.AddMarker);
+      google.maps.event.addListener(Map.Map, 'dblclick', Map.AddMarker);
+      if (Map.Circle)
+        google.maps.event.addListener(Map.Circle, 'dblclick', Map.AddMarker);
+      google.maps.event.addListener(Map.Map, 'rclick', Map.AddMarker);
     }
   }
 };
@@ -73,13 +76,17 @@ Map.AddMarker = function(e) {
     });
 
     Orig = document.getElementById('add');
-    Map.AddModal = document.createElement('div');
-    Map.AddModal.className = 'modal';
-    Map.AddModal.innerHTML = Orig.innerHTML;
-    document.body.appendChild(Map.AddModal);
+    Map.NewMarker.Modal = document.createElement('div');
+    Map.NewMarker.Modal.className = 'modal';
+    Map.NewMarker.Modal.innerHTML = Orig.innerHTML;
+    document.body.appendChild(Map.NewMarker.Modal);
 
-    Map.AddModal.style.visibility = 'visible';
-    Map.AddModal.style.top = e.pixel.y - 150 + 'px';
-    Map.AddModal.style.left = e.pixel.x - 450 + 'px';
+    Map.NewMarker.Modal.style.visibility = 'visible';
   }
 };
+
+Map.RemoveAddMarker = function() {
+  document.body.removeChild(Map.NewMarker.Modal);
+  Map.NewMarker.setMap(null);
+  Map.NewMarker = undefined;
+}

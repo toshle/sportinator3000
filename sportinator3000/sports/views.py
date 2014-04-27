@@ -10,7 +10,9 @@ from django.shortcuts import redirect
 
 
 def home(request):
-    return render(request, 'sports/home.html', {})
+    return render(request, 'sports/home.html',
+                  {'sports': Sport.objects.all()})
+
 
 
 def home_content(request):
