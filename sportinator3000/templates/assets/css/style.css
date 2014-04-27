@@ -292,6 +292,11 @@ img {
   width: 176px !important;
 }
 
+#content table a{
+  color: black;
+  text-decoration: underline;
+}
+
 #content table {
   background-color: rgba(255, 255, 255, 0.6);
   text-align: left;
@@ -324,6 +329,14 @@ img {
   box-shadow: 10px 10px 5px #888888;
 }
 
+#back_button {
+  position:absolute;
+  bottom: 35px;
+  z-index: 2000;
+  background-color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 0px;
+}
+
 .button {
   background-color: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(0, 0, 0, 0.5);
@@ -333,6 +346,7 @@ img {
   cursor: pointer;
   font-size: 14px;
   margin-top: 25px;
+  margin-bottom: 5px;
 }
 
 #upper_table {

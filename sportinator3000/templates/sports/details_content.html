@@ -41,12 +41,14 @@
       <td class="field" width="100">Град</td>
       <td class="field" width="200">Адрес</td>
       <td class="field">Описание</td>
+      <td class="field">Добавил</td>
     </tr>
     <tr>
       <td class="value">{{ place.name }}</td>
       <td class="value">{{ place.city }}</td>
       <td class="value">{{ place.address }}</td>
       <td class="value">{{ place.description }}</td>
+      <td class="value"><a href="/profile/{{ place.user.id }}">{{ place.user.username }}</a></td>
     </tr>
   </table>
 
@@ -83,8 +85,6 @@
 
   </table>
   {% endif %}
-
-  <button class="button" onclick="history.back();">Назад</button>
 
   {% if user.is_active %}
 
