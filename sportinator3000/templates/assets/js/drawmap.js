@@ -11,9 +11,9 @@ Map = {};
 
   Map.Position = new google.maps.LatLng(window.pos.lat, window.pos.lng);
   Map.Attrs = {
-    Radius: 1,
+    Radius: 10,
     Sport: 0,
-    Period: 0,
+    Duration: 0,
     Price: 200,
   };
   Map.Options = {
@@ -30,12 +30,5 @@ Map = {};
       Map.FilteredDraw();
     else if (Map.PlaceAllMarkers !== undefined)
       Map.PlaceAllMarkers();
-  }
-
-  google.maps.event.addListener(Map, 'center_changed', UpdateCoords);
-
-  function UpdateCoords(e) {
-    console.log(e);
-    // window.pos.lng = 
   }
 })();

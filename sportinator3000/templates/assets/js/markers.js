@@ -43,7 +43,9 @@ Map.PlaceAllMarkers = function() {
 
 Map.PlaceFilteredMarkers = function() {
   Map.PlaceMarkers('api/filters?latitude=' + Map.Position.k +
-      '&longitude=' + Map.Position.A + '&radius=' + Map.Attrs.Radius
+      '&longitude=' + Map.Position.A + '&radius=' + Map.Attrs.Radius +
+      '&sport=' + Map.Attrs.Sport + '&duration=' + Map.Attrs.Duration +
+      '&price=' + Map.Attrs.Price
     );
 };
 
