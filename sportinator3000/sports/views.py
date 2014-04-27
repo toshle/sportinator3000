@@ -40,18 +40,6 @@ def sports(request):
 
 
 def sports_content(request):
-    def distance_between_points(latitude1, longitude1, latitude2, longitude2):
-        degrees_to_radians = math.pi/180.0
-        phi1 = (90.0 - latitude1)*degrees_to_radians
-        phi2 = (90.0 - latitude2)*degrees_to_radians
-        theta1 = longitude1*degrees_to_radians
-        theta2 = longitude2*degrees_to_radians
-        cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) +
-               math.cos(phi1)*math.cos(phi2))
-        arc = math.acos(cos)
-
-        return arc*6373
-
     close_places = [place for place in
                     PlaceActivity.objects.filter(
                         activity__sport__id=request.GET['sport'],

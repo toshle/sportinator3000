@@ -9,7 +9,6 @@ def distance_between_points(latitude1, longitude1, latitude2, longitude2):
     cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) +
            math.cos(phi1)*math.cos(phi2))
     arc = math.acos(cos)
-
     return arc*6373
 
 def filter_by_sport(data, sport_name):
