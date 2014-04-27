@@ -32,11 +32,12 @@ Map.PlaceMarkers = function(url) {
       });
 
       google.maps.event.addListener(Marker, 'click', Map.OpenInfo);
+      google.maps.event.addListener(Map.Circle, 'click', Map.CloseModals);
+      google.maps.event.addListener(Map.Map, 'click', Map.CloseModals);
       google.maps.event.addListener(Map.Map, 'dblclick', Map.AddMarker);
       if (Map.Circle) {
         google.maps.event.addListener(Map.Circle, 'dblclick', Map.AddMarker);
         google.maps.event.addListener(Map.Circle, 'rightclick', Map.Move);
-        google.maps.event.addListener(Map.Map, 'dblclick', Map.AddMarker);
         google.maps.event.addListener(Map.Map, 'rightclick', Map.Move);
       }
     }
